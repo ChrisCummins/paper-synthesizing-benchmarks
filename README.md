@@ -34,27 +34,6 @@
 
 **Keywords**  Synthetic program generation, OpenCL, Benchmarking, Deep Learning, GPUs
 
-## Getting Started
-
-Install [git-lfs](https://github.com/github/git-lfs/wiki/Installation):
-```sh
-# On Ubuntu Linux:
-$ curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
-$ sudo apt-get install git-lfs
-$ git lfs install
-# On OS X:
-$ brew install git-lfs
-$ git lfs install
-```
-
-Clone this repository:
-```sh
-$ git clone https://github.com/ChrisCummins/paper-synthesizing-benchmarks.git
-```
-
-See [code](code/) directory for instructions to replicate and reproduce
-experiments. See [data](data/) directory for raw experimental data.
-
 ## Acknowledgements
 
 * [@AdamHarries](https://github.com/AdamHarries) for reviewing early drafts of
