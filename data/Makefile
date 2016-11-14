@@ -1,6 +1,7 @@
 .DEFAULT_GOAL = all
 
-unpacked_files := \
+data_files := \
+	clgen-github-model-2016-nov-2048x3.tar.bz2 \
 	github.db \
 	tiny-corpus
 
@@ -12,6 +13,6 @@ clgen-github-model-2016-nov-2048x3.tar.bz2:
 	touch $@
 
 clean:
-	rm -rf $(unpacked_files)
+	rm -rf $(data_files)
 
-all: $(unpacked_files) clgen-github-model-2016-nov-2048x3.tar.bz2
+all: $(data_files)
