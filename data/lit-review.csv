@@ -1,0 +1,449 @@
+Conference,Year,Paper,Benchmark Suite
+HiPC,2015,paper-01,NVIDIA SDK
+HiPC,2015,paper-01,NVIDIA SDK
+HiPC,2015,paper-01,NVIDIA SDK
+HiPC,2015,paper-01,NVIDIA SDK
+HiPC,2015,paper-01,NVIDIA SDK
+HiPC,2015,paper-01,NVIDIA SDK
+HiPC,2015,paper-01,NVIDIA SDK
+HiPC,2015,paper-01,NVIDIA SDK
+HiPC,2015,paper-01,Parboil
+HiPC,2015,paper-01,Parboil
+HiPC,2015,paper-01,Parboil
+HiPC,2015,paper-01,Parboil
+HiPC,2015,paper-01,AMD SDK
+HiPC,2015,paper-01,AMD SDK
+HiPC,2015,paper-01,AMD SDK
+HiPC,2015,paper-01,AMD SDK
+HiPC,2015,paper-01,AMD SDK
+HiPC,2015,paper-01,AMD SDK
+HiPC,2015,paper-01,AMD SDK
+HiPC,2015,paper-01,AMD SDK
+HiPC,2015,paper-01,AMD SDK
+HiPC,2015,paper-01,AMD SDK
+HiPC,2015,paper-01,AMD SDK
+HiPC,2015,paper-01,AMD SDK
+HiPC,2015,paper-01,AMD SDK
+HiPC,2015,paper-01,AMD SDK
+HiPC,2015,paper-01,AMD SDK
+HiPC,2015,paper-01,AMD SDK
+HiPC,2015,paper-01,AMD SDK
+HiPC,2015,paper-01,Ploybench
+HiPC,2015,paper-01,Ploybench
+HiPC,2015,paper-01,Ploybench
+HiPC,2015,paper-01,Ploybench
+HiPC,2015,paper-01,Ploybench
+HiPC,2015,paper-01,Ploybench
+CGO,2013,paper-02,SHOC
+CGO,2013,paper-02,SHOC
+CGO,2013,paper-02,SHOC
+CGO,2013,paper-02,SHOC
+CGO,2013,paper-02,SHOC
+CGO,2013,paper-02,SHOC
+CGO,2013,paper-02,SHOC
+CGO,2013,paper-02,SHOC
+CGO,2013,paper-02,SHOC
+CGO,2013,paper-02,SHOC
+CGO,2013,paper-02,SHOC
+CGO,2013,paper-02,NVIDIA SDK
+CGO,2013,paper-02,NVIDIA SDK
+CGO,2013,paper-02,NVIDIA SDK
+CGO,2013,paper-02,NVIDIA SDK
+CGO,2013,paper-02,NVIDIA SDK
+CGO,2013,paper-02,NVIDIA SDK
+CGO,2013,paper-02,NVIDIA SDK
+CGO,2013,paper-02,NVIDIA SDK
+CGO,2013,paper-02,NVIDIA SDK
+CGO,2013,paper-02,NVIDIA SDK
+CGO,2013,paper-02,NVIDIA SDK
+CGO,2013,paper-02,AMD SDK
+CGO,2013,paper-02,AMD SDK
+CGO,2013,paper-02,AMD SDK
+CGO,2013,paper-02,AMD SDK
+CGO,2013,paper-02,AMD SDK
+CGO,2013,paper-02,AMD SDK
+CGO,2013,paper-02,AMD SDK
+CGO,2013,paper-02,AMD SDK
+CGO,2013,paper-02,AMD SDK
+CGO,2013,paper-02,AMD SDK
+CGO,2013,paper-02,AMD SDK
+CGO,2013,paper-02,Parboil
+CGO,2013,paper-02,Parboil
+CGO,2013,paper-02,Parboil
+CGO,2013,paper-02,Parboil
+CGO,2013,paper-02,Parboil
+CGO,2013,paper-02,Parboil
+CGO,2013,paper-02,Parboil
+CGO,2013,paper-02,Parboil
+CGO,2013,paper-02,Parboil
+CGO,2013,paper-02,Parboil
+CGO,2015,paper-02,Parboil
+PACT,2014,paper-03,AMD SDK
+PACT,2014,paper-03,AMD SDK
+PACT,2014,paper-03,AMD SDK
+PACT,2014,paper-03,AMD SDK
+PACT,2014,paper-03,AMD SDK
+PACT,2014,paper-03,AMD SDK
+PACT,2014,paper-03,AMD SDK
+PACT,2014,paper-03,AMD SDK
+PACT,2014,paper-03,AMD SDK
+PACT,2014,paper-03,AMD SDK
+PACT,2014,paper-03,NVIDIA SDK
+PACT,2014,paper-03,NVIDIA SDK
+PACT,2014,paper-03,NVIDIA SDK
+PACT,2014,paper-03,Parboil
+PACT,2014,paper-03,Parboil
+PACT,2014,paper-03,Parboil
+PACT,2014,paper-03,Parboil
+PACT,2015,paper-04,NVIDIA SDK
+PACT,2015,paper-04,NVIDIA SDK
+PACT,2015,paper-04,NVIDIA SDK
+PACT,2015,paper-04,NVIDIA SDK
+PACT,2015,paper-04,NVIDIA SDK
+PACT,2015,paper-04,NVIDIA SDK
+PACT,2015,paper-04,NVIDIA SDK
+PACT,2015,paper-04,NVIDIA SDK
+PACT,2015,paper-04,NVIDIA SDK
+PACT,2015,paper-04,NVIDIA SDK
+PACT,2015,paper-04,NVIDIA SDK
+PACT,2015,paper-04,Rodinia
+PACT,2015,paper-04,Rodinia
+PACT,2015,paper-04,Rodinia
+PACT,2015,paper-04,Rodinia
+PACT,2015,paper-04,Rodinia
+PACT,2015,paper-04,Rodinia
+PACT,2015,paper-04,Rodinia
+PACT,2015,paper-04,Rodinia
+PACT,2015,paper-04,Rodinia
+PACT,2015,paper-04,Rodinia
+PACT,2015,paper-04,Rodinia
+PACT,2015,paper-04,Rodinia
+PACT,2015,paper-05,NVIDIA SDK
+PACT,2015,paper-05,NVIDIA SDK
+PACT,2015,paper-05,NVIDIA SDK
+PACT,2015,paper-05,Rodinia
+PACT,2015,paper-05,Rodinia
+PACT,2015,paper-05,Rodinia
+PACT,2015,paper-05,MARS
+PACT,2015,paper-05,MARS
+PACT,2015,paper-05,MARS
+PACT,2015,paper-05,MARS
+PACT,2015,paper-05,Lonestar
+PACT,2015,paper-05,Lonestar
+PACT,2015,paper-05,Lonestar
+PACT,2015,paper-05,Lonestar
+PACT,2015,paper-05,Lonestar
+CGO,2014,paper-06,Polybench
+CGO,2014,paper-06,Polybench
+CGO,2014,paper-06,Polybench
+CGO,2014,paper-06,Polybench
+CGO,2014,paper-06,Polybench
+CGO,2014,paper-06,Polybench
+CGO,2014,paper-06,Polybench
+CGO,2014,paper-06,Polybench
+CGO,2014,paper-06,Polybench
+CGO,2014,paper-06,Polybench
+CGO,2014,paper-06,Polybench
+CGO,2014,paper-07,NAS
+CGO,2014,paper-07,NAS
+CGO,2014,paper-07,NAS
+CGO,2014,paper-07,NAS
+CGO,2014,paper-07,NAS
+CGO,2014,paper-07,NAS
+CGO,2014,paper-07,NAS
+CGO,2014,paper-08,Parboil
+CGO,2014,paper-08,Parboil
+CGO,2014,paper-08,Parboil
+CGO,2014,paper-08,Parboil
+CGO,2014,paper-08,Parboil
+CGO,2014,paper-08,Parboil
+CGO,2014,paper-08,Parboil
+CGO,2014,paper-08,Rodinia
+CGO,2014,paper-08,Rodinia
+CGO,2014,paper-08,Rodinia
+CGO,2014,paper-08,Rodinia
+CGO,2014,paper-08,Rodinia
+CGO,2015,paper-09,NVIDIA SDK
+CGO,2015,paper-09,NVIDIA SDK
+CGO,2015,paper-09,NVIDIA SDK
+CGO,2015,paper-09,NVIDIA SDK
+CGO,2015,paper-09,NVIDIA SDK
+CGO,2015,paper-09,NVIDIA SDK
+CGO,2015,paper-09,NVIDIA SDK
+CGO,2015,paper-09,NVIDIA SDK
+CGO,2015,paper-09,NVIDIA SDK
+CGO,2015,paper-09,NVIDIA SDK
+CGO,2015,paper-09,NVIDIA SDK
+CGO,2015,paper-09,NVIDIA SDK
+CGO,2015,paper-09,Rodinia
+CGO,2015,paper-09,Rodinia
+CGO,2015,paper-09,Rodinia
+CGO,2015,paper-09,Rodinia
+CGO,2015,paper-09,Rodinia
+CGO,2015,paper-09,Rodinia
+CGO,2015,paper-09,Rodinia
+CGO,2015,paper-09,Rodinia
+CGO,2015,paper-09,Rodinia
+CGO,2015,paper-09,Rodinia
+CGO,2015,paper-09,Rodinia
+CGO,2015,paper-09,Rodinia
+CGO,2015,paper-09,Rodinia
+CGO,2016,paper-10,Parboil
+CGO,2016,paper-10,Parboil
+CGO,2016,paper-10,Parboil
+CGO,2016,paper-10,Parboil
+CGO,2016,paper-10,Parboil
+CGO,2016,paper-10,Parboil
+CGO,2016,paper-10,Parboil
+CGO,2016,paper-10,Parboil
+CGO,2016,paper-10,Parboil
+CGO,2016,paper-10,Parboil
+CGO,2016,paper-10,Parboil
+CGO,2016,paper-10,Parboil
+CGO,2016,paper-10,Parboil
+CGO,2016,paper-10,Parboil
+CGO,2016,paper-10,Parboil
+CGO,2016,paper-10,Parboil
+CGO,2016,paper-10,Parboil
+CGO,2016,paper-10,Parboil
+CGO,2016,paper-10,Parboil
+CGO,2016,paper-10,Parboil
+CGO,2016,paper-10,Parboil
+CGO,2016,paper-10,Parboil
+CGO,2016,paper-10,Parboil
+CGO,2016,paper-10,Parboil
+CGO,2016,paper-10,Parboil
+CGO,2015,paper-11,NVIDIA SDK
+CGO,2015,paper-11,NVIDIA SDK
+CGO,2015,paper-11,GPGPUsim
+CGO,2015,paper-11,Rodinia
+CGO,2015,paper-11,Rodinia
+CGO,2015,paper-11,Rodinia
+CGO,2015,paper-11,Rodinia
+CGO,2015,paper-11,Rodinia
+CGO,2015,paper-11,Rodinia
+CGO,2015,paper-11,Rodinia
+CGO,2015,paper-11,Rodinia
+CGO,2015,paper-11,Rodinia
+CGO,2015,paper-12,SHOC
+CGO,2015,paper-12,Rodinia
+CGO,2015,paper-12,Rodinia
+CGO,2015,paper-12,Rodinia
+CGO,2015,paper-12,Polybench
+CGO,2015,paper-12,Polybench
+CGO,2015,paper-12,Polybench
+CGO,2015,paper-12,Polybench
+CGO,2015,paper-12,Polybench
+CGO,2015,paper-12,Polybench
+PPoPP,2014,paper-13,AMD SDK
+PPoPP,2014,paper-13,AMD SDK
+PPoPP,2014,paper-13,AMD SDK
+PPoPP,2014,paper-13,AMD SDK
+PPoPP,2014,paper-13,AMD SDK
+PPoPP,2014,paper-13,AMD SDK
+PPoPP,2014,paper-13,AMD SDK
+PPoPP,2014,paper-13,AMD SDK
+PPoPP,2014,paper-13,NVIDIA SDK
+PPoPP,2014,paper-13,NVIDIA SDK
+PPoPP,2014,paper-13,NVIDIA SDK
+PPoPP,2014,paper-13,NVIDIA SDK
+PPoPP,2014,paper-13,NVIDIA SDK
+PPoPP,2014,paper-13,Parboil
+PPoPP,2014,paper-13,Parboil
+PPoPP,2014,paper-13,Parboil
+PACT,2014,paper-14,Rodinia
+PACT,2014,paper-14,Rodinia
+PACT,2014,paper-14,Rodinia
+PACT,2014,paper-14,Rodinia
+PACT,2014,paper-14,Rodinia
+PACT,2014,paper-14,Rodinia
+PACT,2014,paper-14,Rodinia
+PACT,2014,paper-14,Rodinia
+PACT,2014,paper-14,Rodinia
+PACT,2014,paper-14,Rodinia
+PACT,2014,paper-14,Rodinia
+PACT,2014,paper-14,Rodinia
+PACT,2014,paper-14,Rodinia
+PACT,2014,paper-14,Rodinia
+PACT,2014,paper-14,Rodinia
+PACT,2014,paper-14,Rodinia
+PACT,2014,paper-14,Ad-hoc
+PACT,2014,paper-14,Ad-hoc
+PACT,2014,paper-14,Ad-hoc
+PACT,2014,paper-14,Ad-hoc
+PACT,2014,paper-14,Ad-hoc
+PACT,2014,paper-14,Ad-hoc
+PACT,2014,paper-15,Rodinia
+PACT,2014,paper-15,Rodinia
+PACT,2014,paper-15,Rodinia
+PACT,2014,paper-15,Rodinia
+PACT,2014,paper-15,Rodinia
+PACT,2014,paper-15,Rodinia
+PACT,2014,paper-15,Rodinia
+PACT,2014,paper-15,Rodinia
+PACT,2014,paper-15,Rodinia
+PACT,2014,paper-15,Rodinia
+PACT,2014,paper-15,Rodinia
+PACT,2014,paper-15,Rodinia
+PACT,2014,paper-15,Rodinia
+PACT,2014,paper-15,Rodinia
+PACT,2014,paper-15,Rodinia
+PACT,2014,paper-15,Rodinia
+PACT,2014,paper-15,Rodinia
+PACT,2014,paper-16,Rodinia
+PACT,2014,paper-16,Rodinia
+PACT,2014,paper-16,Rodinia
+PACT,2014,paper-16,Parboil
+PACT,2014,paper-17,Rodinia
+PACT,2014,paper-17,Rodinia
+PACT,2014,paper-17,Rodinia
+PACT,2014,paper-17,Rodinia
+PACT,2014,paper-17,Rodinia
+PACT,2014,paper-17,Rodinia
+PACT,2014,paper-17,Rodinia
+PACT,2014,paper-17,Rodinia
+PACT,2014,paper-17,Rodinia
+PACT,2014,paper-17,Rodinia
+PACT,2014,paper-18,NVIDIA SDK
+PACT,2014,paper-18,NVIDIA SDK
+PACT,2014,paper-18,NVIDIA SDK
+PACT,2014,paper-18,NVIDIA SDK
+PACT,2014,paper-18,NVIDIA SDK
+PACT,2014,paper-18,NVIDIA SDK
+PACT,2014,paper-18,NVIDIA SDK
+PACT,2014,paper-18,NVIDIA SDK
+PACT,2014,paper-18,NVIDIA SDK
+PACT,2014,paper-18,Rodinia
+PACT,2014,paper-18,Rodinia
+PACT,2014,paper-18,Rodinia
+PACT,2014,paper-18,NVIDIA SDK
+PACT,2013,paper-19,SPEC-Viewperf
+PACT,2013,paper-19,SPEC-Viewperf
+PACT,2013,paper-19,SPEC-Viewperf
+PACT,2013,paper-19,SPEC-Viewperf
+PACT,2013,paper-19,SPEC-Viewperf
+PACT,2013,paper-20,AMD SDK
+PACT,2013,paper-20,AMD SDK
+PACT,2013,paper-20,AMD SDK
+PACT,2013,paper-20,AMD SDK
+PACT,2013,paper-20,AMD SDK
+PACT,2013,paper-20,AMD SDK
+PACT,2013,paper-20,AMD SDK
+PACT,2013,paper-20,AMD SDK
+PACT,2013,paper-20,NVIDIA SDK
+PACT,2013,paper-20,NVIDIA SDK
+PACT,2013,paper-21,NVIDIA SDK
+PACT,2013,paper-21,NVIDIA SDK
+PACT,2013,paper-21,NVIDIA SDK
+PACT,2013,paper-21,NVIDIA SDK
+PACT,2013,paper-21,NVIDIA SDK
+PACT,2013,paper-21,NVIDIA SDK
+PACT,2013,paper-21,NVIDIA SDK
+PACT,2013,paper-21,NVIDIA SDK
+PACT,2013,paper-21,NVIDIA SDK
+PACT,2013,paper-21,NVIDIA SDK
+PACT,2013,paper-21,Rodinia
+PACT,2013,paper-21,Rodinia
+PACT,2013,paper-21,Rodinia
+PACT,2013,paper-21,Rodinia
+PACT,2013,paper-22,NAS
+PACT,2013,paper-22,NAS
+PACT,2013,paper-22,NAS
+PACT,2013,paper-22,NAS
+PACT,2013,paper-22,NAS
+PACT,2013,paper-22,NAS
+PACT,2013,paper-22,NAS
+PACT,2013,paper-22,NAS
+PACT,2013,paper-22,NAS
+PACT,2013,paper-22,NAS
+PACT,2013,paper-22,NAS
+PACT,2013,paper-22,NAS
+PACT,2013,paper-22,NAS
+PACT,2013,paper-22,NAS
+PACT,2013,paper-22,NAS
+PACT,2013,paper-22,NAS
+PACT,2013,paper-22,NAS
+PACT,2013,paper-22,NAS
+PACT,2013,paper-22,NAS
+PACT,2013,paper-22,NAS
+PACT,2013,paper-22,NAS
+PACT,2013,paper-22,NAS
+PACT,2013,paper-22,NAS
+PACT,2013,paper-22,NAS
+PACT,2013,paper-22,NAS
+PACT,2013,paper-22,NAS
+PACT,2013,paper-22,NAS
+PACT,2013,paper-22,NAS
+PACT,2013,paper-22,NAS
+PACT,2013,paper-22,NAS
+PACT,2013,paper-22,NAS
+PACT,2014,paper-23,Rodinia
+PACT,2014,paper-23,Rodinia
+PACT,2014,paper-23,Rodinia
+PACT,2014,paper-23,Rodinia
+PACT,2014,paper-23,Rodinia
+PACT,2014,paper-23,Rodinia
+PACT,2014,paper-23,Rodinia
+PACT,2014,paper-23,Parboil
+PACT,2014,paper-23,Parboil
+PACT,2014,paper-23,Parboil
+PACT,2014,paper-23,Parboil
+PACT,2014,paper-23,Parboil
+PACT,2014,paper-23,Parboil
+PACT,2014,paper-23,ISPASS
+PACT,2014,paper-23,ISPASS
+PACT,2014,paper-23,ISPASS
+PACT,2014,paper-23,ISPASS
+PACT,2014,paper-23,ISPASS
+PACT,2014,paper-23,ISPASS
+HiPC,2014,paper-24,NVIDIA SDK
+HiPC,2014,paper-24,NVIDIA SDK
+HiPC,2014,paper-24,NVIDIA SDK
+HiPC,2014,paper-24,NVIDIA SDK
+HiPC,2014,paper-24,NVIDIA SDK
+HiPC,2014,paper-24,NVIDIA SDK
+HiPC,2014,paper-24,NVIDIA SDK
+HiPC,2014,paper-24,NVIDIA SDK
+HiPC,2014,paper-24,Parboil
+HiPC,2014,paper-24,Parboil
+HiPC,2014,paper-24,Parboil
+HiPC,2014,paper-24,Parboil
+HiPC,2014,paper-24,AMD SDK
+HiPC,2014,paper-24,AMD SDK
+HiPC,2014,paper-24,AMD SDK
+HiPC,2014,paper-24,AMD SDK
+HiPC,2014,paper-24,AMD SDK
+HiPC,2014,paper-24,AMD SDK
+HiPC,2014,paper-24,AMD SDK
+HiPC,2014,paper-24,AMD SDK
+HiPC,2014,paper-24,AMD SDK
+HiPC,2014,paper-24,AMD SDK
+HiPC,2014,paper-24,AMD SDK
+HiPC,2014,paper-24,AMD SDK
+HiPC,2014,paper-24,AMD SDK
+HiPC,2014,paper-24,AMD SDK
+HiPC,2014,paper-24,AMD SDK
+HiPC,2014,paper-24,AMD SDK
+HiPC,2014,paper-24,AMD SDK
+HiPC,2014,paper-24,Polybench
+HiPC,2014,paper-24,Polybench
+HiPC,2014,paper-24,Polybench
+HiPC,2014,paper-24,Polybench
+HiPC,2014,paper-24,Polybench
+HiPC,2014,paper-24,Polybench
+PPoPP,2015,paper-25,Rodinia
+PPoPP,2015,paper-25,Rodinia
+PPoPP,2015,paper-25,Rodinia
+PPoPP,2015,paper-25,Rodinia
+PPoPP,2015,paper-25,Rodinia
+PPoPP,2015,paper-25,AMD SDK
+PPoPP,2015,paper-25,AMD SDK
+PPoPP,2015,paper-25,AMD SDK
+PPoPP,2015,paper-25,AMD SDK
+PPoPP,2013,paper-26,Rodinia
+PPoPP,2013,paper-26,Rodinia
+PPoPP,2013,paper-26,Rodinia
+PPoPP,2013,paper-26,Rodinia
+PPoPP,2013,paper-26,Rodinia
+PPoPP,2013,paper-26,GPGPUsim
+PPoPP,2013,paper-26,GPGPUsim
