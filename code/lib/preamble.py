@@ -44,6 +44,16 @@ if not cfg.USE_OPENCL:
     print("warning: CLgen does not have OpenCL support. Some of the "
           "experiments in this notebook will fail.", file=sys.stderr)
 
+# warn if CLgen version is incorrect
+REQUIRED_CLGEN_VERSION = "0.1.7"
+if clgen.version() != REQUIRED_CLGEN_VERSION:
+    print("warning: This notebook requires CLgen version {required}. "
+          "You have version {actual} installed."
+          .format(required=REQUIRED_CLGEN_VERSION, actual=clgen.version()),
+          file=sys.stderr)
+    print("         There may be incompatabilities.", file=sys.stderr)
+
+
 def line_word_char_count(path):
     """count words, lines, chars in file"""
     num_lines = 0
