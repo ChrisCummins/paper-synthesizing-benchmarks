@@ -1,6 +1,5 @@
 clgen  # install CLgen from here: http://chriscummins.cc/clgen/
 matplotlib==1.5.3
-labm8==0.0.10
 seaborn==0.7.1
 numpy==1.11.2
 pandas==0.19.0
