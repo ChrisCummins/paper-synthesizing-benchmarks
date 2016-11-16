@@ -17,7 +17,7 @@ $ pip3 install --upgrade pip setuptools wheel
 
 Install the CLgen [requirements](http://chriscummins.cc/clgen/#requirements):
 ```sh
-$ curl -s https://raw.githubusercontent.com/ChrisCummins/clgen/0.1.1/install-deps.sh | bash
+$ curl -s https://raw.githubusercontent.com/ChrisCummins/clgen/0.1.7/install-deps.sh | bash
 ```
 
 ## Installation - Virtualenv
@@ -35,11 +35,11 @@ $ source env/bin/activate
 Install one of the [CLgen](http://chriscummins.cc/clgen/) releases:
 ```sh
 # if you have CUDA:
-(env)$ curl -s https://raw.githubusercontent.com/ChrisCummins/clgen/0.1.1/install-cuda.sh | bash
+(env)$ curl -s https://raw.githubusercontent.com/ChrisCummins/clgen/0.1.7/install-cuda.sh | bash
 # if you have OpenCL:
-(env)$ curl -s https://raw.githubusercontent.com/ChrisCummins/clgen/0.1.1/install-opencl.sh | bash
+(env)$ curl -s https://raw.githubusercontent.com/ChrisCummins/clgen/0.1.7/install-opencl.sh | bash
 # CPU-only (this will disable some of the experiments):
-(env)$ curl -s https://raw.githubusercontent.com/ChrisCummins/clgen/0.1.1/install-cpu.sh | bash
+(env)$ curl -s https://raw.githubusercontent.com/ChrisCummins/clgen/0.1.7/install-cpu.sh | bash
 ```
 
 Install the requirements for these experiments:
