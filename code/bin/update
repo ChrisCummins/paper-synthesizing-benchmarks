@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+#
+# Rebuild training data.
+#
+set -eux
+
+usage() {
+    echo "Usage: $0 <data-dir>"
+    echo
+    echo "Rebuild training data."
+}
+
+wait_for_jobs() {
+    for job in $(jobs -p); do
+        wait $job;
+    done
+}
+
+main() {
+    if [[ $# -ne 1 ]]; then
+        usage >&2
+        exit 1
+    fi
+
+    local datadir=$1
+
+    # Make static kernel features.
+    cd $datadir/kernels
+    ls | grep '.cl' | xargs -L 1000 clgen-features > features.csv
+
+    # Make error files.
+    ./mkerros intel $datadir/ &
+    ./mkerros nvidia $datadir/ &
+    wait_for_jobs
+
+    ./mktraining $datadir/kernels \
+                 $datadir/intel.csv \
+                 $datadir/nvidia.csv \
+                 > $datadir/platform.csv &
+    wait_for_jobs
+}
+main $@
