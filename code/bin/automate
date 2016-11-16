@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+#
+# Requirements: Linux, bc.
 set -eu
 
 usage() {
@@ -48,8 +50,7 @@ main() {
     local errors_path=$benchmarks_dir/$devname-errors.csv
 
     if [[ $UID -ne 0 ]]; then
-        echo "fatal: Must run as root" >&2
-        exit 1
+        echo "warning: Not running as root, cannot reboot machine" >&2
     fi
 
     if [ ! -d $benchmarks_dir ]; then

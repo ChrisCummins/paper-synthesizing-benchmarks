@@ -12,10 +12,8 @@ import sys
 from argparse import ArgumentParser
 from labm8 import fs
 
-import clgen
 
-
-class MalformedDataException(clgen.CLgenError):
+class MalformedDataException(Exception):
     """data file is malformed"""
     pass
 
@@ -117,9 +115,9 @@ def main():
     args = parser.parse_args()
 
     try:
-        clgen.must_exist(args.kernels)
-        clgen.must_exist(args.results)
-        clgen.must_exist(args.errors)
+        assert(fs.exists(args.kernels))
+        assert(fs.exists(args.results))
+        assert(fs.exists(args.errors))
 
         jobs = mkjoblist(args.kernels, args.results, args.errors)
         for job in jobs:
