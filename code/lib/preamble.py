@@ -8,8 +8,9 @@ import re
 import seaborn as sns
 import sys
 
-from collections import defaultdict,Counter
+from collections import Counter, defaultdict, OrderedDict
 from functools import partial
+from io import StringIO
 from itertools import permutations
 from labm8 import fmt
 from labm8 import fs
@@ -52,6 +53,19 @@ if clgen.version() != REQUIRED_CLGEN_VERSION:
           .format(required=REQUIRED_CLGEN_VERSION, actual=clgen.version()),
           file=sys.stderr)
     print("         There may be incompatabilities.", file=sys.stderr)
+
+
+class DictTable(dict):
+    """takes a dict and renders an HTML table"""
+    def _repr_html_(self):
+        html = ["<table width=100%>"]
+        for key, value in self.items():
+            html.append("<tr>")
+            html.append("<td><b>{0}</b></td>".format(key))
+            html.append("<td>{0}</td>".format(value))
+            html.append("</tr>")
+        html.append("</table>")
+        return ''.join(html)
 
 
 def line_word_char_count(path):
