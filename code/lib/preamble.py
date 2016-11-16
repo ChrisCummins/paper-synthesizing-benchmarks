@@ -38,7 +38,7 @@ plt.style.use(["seaborn-white", "seaborn-paper"])
 # tables config:
 pd.set_option('display.max_rows', 15)
 
-#
+# warn if CLgen doesn't have OpenCL support
 from clgen import config as cfg
 if not cfg.USE_OPENCL:
     print("warning: CLgen does not have OpenCL support. Some of the "
