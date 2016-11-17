@@ -157,12 +157,8 @@ def main():
     parser.add_argument('gpu', help='path to GPU results CSV')
     args = parser.parse_args()
 
-    try:
-        assert(fs.exists(args.cpu))
-        assert(fs.exists(args.gpu))
-    except Exception as e:
-        print('fatal:', e, file=sys.stderr)
-        sys.exit(1)
+    assert(fs.exists(args.cpu))
+    assert(fs.exists(args.gpu))
 
     mktraining(args.cpu, args.gpu)
 
