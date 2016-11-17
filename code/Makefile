@@ -3,13 +3,19 @@
 .PHONY: install run
 
 ifeq ($(VIRTUAL_ENV),)
-#
-# System-wide install:
-#
-PYTHON ?= python
-PIP ?= pip
+$(error "not in a virtualenv")
+endif
 
-install: .ipython/kernels/CLgen/kernel.json
+PYTHON = $(VIRTUAL_ENV)/bin/python
+PIP = $(VIRTUAL_ENV)/bin/pip
+
+data_files := benchmarks/amd-app-sdk-3.0
+
+%: %.tar.bz2
+	cd $(dir $<) && tar xf $(notdir $<)
+	touch $@
+
+install: .ipython/kernels/CLgen/kernel.json $(data_files)
 	$(MAKE) -C ../data
 	mkdir -p ~/.ipython/kernels
 	test -d ~/.ipython/kernels/CLgen || cp -R .ipython/kernels/CLgen ~/.ipython/kernels
@@ -21,20 +27,3 @@ install: .ipython/kernels/CLgen/kernel.json
 
 run:
 	jupyter notebook
-else
-#
-# Virtualenv install:
-#
-install: .ipython/kernels/CLgen/kernel.json
-	$(MAKE) -C ../data
-	mkdir -p ~/.ipython/kernels
-	test -d ~/.ipython/kernels/CLgen || cp -R .ipython/kernels/CLgen ~/.ipython/kernels
-	$(VIRTUAL_ENV)/bin/pip install -r requirements.txt
-
-.ipython/kernels/CLgen/kernel.json: .ipython/kernels/CLgen/kernel.json.template
-	cp $< $@
-	sed "s,@PYTHON@,$(VIRTUAL_ENV)/bin/python," -i $@
-
-run:
-	$(VIRTUAL_ENV)/bin/jupyter notebook
-endif
