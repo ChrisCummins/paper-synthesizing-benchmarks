@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+./automate cpu cpu ../../data/clgen-10
+./automate gpu gpu ../../data/clgen-10
+./mktraining \
+    ../../data/clgen-10/kernels \
+    ../../data/clgen-10/cpu.csv \
+    ../../data/clgen-10/gpu.csv > ../../data/clgen-10/training.csv
+
