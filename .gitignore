@@ -3,6 +3,7 @@
 /code/**/*.pyc
 /code/.ipynb_checkpoints
 /code/.ipython/kernels/CLgen/kernel.json
+/code/benchmarks/amd-app-sdk-3.0/
 
 /data/clgen-github-model-2016-nov-2048x3.tar.bz2
 /data/clgen-10
