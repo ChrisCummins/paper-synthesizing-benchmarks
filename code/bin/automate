@@ -13,27 +13,6 @@ usage() {
     echo "  <benchmarks-dir>  Root of benchmarks directory"
 }
 
-timeout_means_restart() {
-    # If you kill an OpenCL program on AMD, it goes into a zombie state,
-    # consuming CPU and GPU resources. The only known fix for this is to
-    # reboot the machine.
-    #
-    local devtype=$1
-    local devname=$2
-
-    if [[ $devtype == "GPU" ]] && [[ $devname == "amd" ]] ; then
-        return 0
-    else
-        return 1
-    fi
-}
-
-# Restart machine after a fixed number of iterations. Not enabled if zero:
-RESTART_EVERY=0
-
-# Restart machine if free memory falls below given %. Not enabled if zero:
-MIN_FREE_MEM=10
-
 
 main() {
     if [[ $# -ne 3 ]]; then
@@ -97,33 +76,6 @@ main() {
 
         if [[ $ret == 137 ]]; then
             echo "$(basename $file),$dsize,E_TIMEOUT,-" >> $errors_path
-
-            if timeout_means_restart $devtype $devname ; then
-                set +e
-                date +"%y-%m-%d %H:%M:%S, $HOSTNAME, SYSTEM RESTART" >> /var/log/cldrive.log
-                echo "TERMINATED A BAD PROCESS. Restarting now" >&2
-                # Goodbye, friend.
-                /sbin/reboot
-            fi
-        fi
-
-        # If we're running low on memory, restart.
-        set +e
-        free_mem=$(free -m | head -n2 | tail -n1 \
-                          | awk '{print "("$4"/"$2") * 100"}' \
-                          | bc -l | xargs printf '%d\n' 2>/dev/null)
-        set -e
-
-        if [[ $free_mem < $MIN_FREE_MEM ]]; then
-            date +"%y-%m-%d %H:%M:%S, $HOSTNAME, LOW MEMORY RESTART, free: $free_mem%%" \
-                 >> /var/log/cldrive.log
-            /sbin/reboot
-        fi
-
-        if [[ $RESTART_EVERY > 0 ]] && [[ $i == $RESTART_EVERY ]]; then
-            date +"%y-%m-%d %H:%M:%S, $HOSTNAME, SCHEDULED SYSTEM RESTART" \
-                 >> /var/log/cldrive.log
-            /sbin/reboot
         fi
     done
 }
