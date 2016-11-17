@@ -42,6 +42,10 @@
 * Volunteers at [@codeplaysoftware](https://github.com/codeplaysoftware/) and
   [University of Edinburgh](http://www.ed.ac.uk/ ) for particpating in the
   qualitative evaluation.
-* [EPSRC](https://www.epsrc.ac.uk/) grants EP/L01503X/1 ([CDT in Pervasive
-  Parallelism](http://pervasiveparallelism.inf.ed.ac.uk/)), EP/H044752/1 (ALEA),
-  and EP/M015793/1 (DIVIDEND).
+* EPSRC grants
+  EP/L01503X/1 ([CDT in Pervasive Parallelism](http://pervasiveparallelism.inf.ed.ac.uk/)),
+  EP/L000055/1 (ALEA),
+  EP/M01567X/1 (SANDeRs),
+  EP/M015823/1,
+  and EP/M015793/1 (DIVIDEND)
+
