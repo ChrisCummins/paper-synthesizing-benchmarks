@@ -127,6 +127,10 @@ def shortlabels(groups):
     return [escape_suite_name(re.sub("-.+$", "", x)) for x in groups]
 
 
+def shortbenchmark(benchmark):
+    return benchmark.split('-')[-1]
+
+
 def escape_benchmark_name(g):
     c = g.split('-')
     return escape_suite_name(g) + "." + c[-2]
