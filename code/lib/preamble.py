@@ -32,6 +32,8 @@ import clgen.preprocess
 import clgen.sampler
 import cgo13
 
+from clgen import config as cfg
+
 # plotting config:
 sns.set(style="ticks", color_codes=True)
 plt.style.use(["seaborn-white", "seaborn-paper"])
@@ -40,10 +42,29 @@ plt.style.use(["seaborn-white", "seaborn-paper"])
 pd.set_option('display.max_rows', 15)
 
 # warn if CLgen doesn't have OpenCL support
-from clgen import config as cfg
 if not cfg.USE_OPENCL:
     print("warning: CLgen does not have OpenCL support. Some of the "
-          "experiments in this notebook will fail.", file=sys.stderr)
+          "experiments in this notebook are disabled.", file=sys.stderr)
+
+
+def has_opencl():
+    """determine if platform supports cldrive"""
+    return cfg.USE_OPENCL
+
+
+def can_reproduce_experiments():
+    """determine if platform can reproduce experiments"""
+    if cfg.USE_OPENCL:
+        import pyopencl as cl
+        import clgen.cldrive
+        try:
+            clgen.cldrive.init_opencl(cl.device_type.CPU)
+            clgen.cldrive.init_opencl(cl.device_type.GPU)
+            return True
+        except Exception:
+            return False
+    else:
+        return False
 
 # warn if CLgen version is incorrect
 REQUIRED_CLGEN_VERSION = "0.1.7"
