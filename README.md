@@ -30,7 +30,7 @@
 > addition, the fine covering of the feature space automatically exposes
 > weaknesses in the feature design which are invisible with the sparse training
 > examples from existing benchmark suites. Correcting these weaknesses further
-> increases performance by 2.66x.
+> increases performance by 4.30x.
 
 **Keywords**  Synthetic program generation, OpenCL, Benchmarking, Deep Learning, GPUs
 
