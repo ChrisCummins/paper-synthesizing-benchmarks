@@ -244,9 +244,9 @@ def main():
     args = parser.parse_args()
 
     try:
-        smith.assert_exists(args.kernels)
-        smith.assert_exists(args.cpu)
-        smith.assert_exists(args.gpu)
+        assert(fs.exists(args.kernels))
+        assert(fs.exists(args.cpu))
+        assert(fs.exists(args.gpu))
     except Exception as e:
         print('fatal:', e, file=sys.stderr)
         sys.exit(1)

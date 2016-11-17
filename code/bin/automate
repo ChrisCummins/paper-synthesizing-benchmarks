@@ -49,10 +49,6 @@ main() {
     local results_path=$benchmarks_dir/$devname.csv
     local errors_path=$benchmarks_dir/$devname-errors.csv
 
-    if [[ $UID -ne 0 ]]; then
-        echo "warning: Not running as root, cannot reboot machine" >&2
-    fi
-
     if [ ! -d $benchmarks_dir ]; then
         echo "fatal: '$benchmarks_dir' not found!" >&2
         exit 1
@@ -130,7 +126,5 @@ main() {
             /sbin/reboot
         fi
     done
-
-    ./mkerros $devname $benchmarks_dir
 }
 main $@
