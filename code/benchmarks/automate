@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+test -n "$DEBUG" && set -x
+
+set -eu
+
+ROOT="$(pwd)"
+
+mvlogs() {
+    local i=$1
+    local devname=$2
+    local prefix=$3
+
+    for f in $(ls logs/good/*); do
+        mv $f "$ROOT/logs/$i/$devname/$prefix-$(basename $f)"
+    done
+}
+
+runsuite() {
+    local i=$1
+    local suite=$2
+    local device=$3
+
+    mkdir -p "$ROOT/logs/$i/$device"
+    DEVTYPE=$device ./run
+    mvlogs $i "$device" "$suite"
+}
+
+
+main() {
+    rm -rf "$ROOT/logs"
+    mkdir "$ROOT/logs"
+
+    local nmax=10
+    local suite=amd-app-sdk-3.0
+
+    for device in CPU GPU; do
+        cd $suite
+
+        echo "$(tput setaf 2)Build $suite for $device$(tput sgr0)"
+        ./set-device $device &>/dev/null
+
+        for i in $(seq 1 $nmax); do
+            echo "$(tput bold)$(tput setaf 2)ITERATION $i of $nmax $suite $device$(tput sgr0) ..."
+            runsuite $i $suite $device
+        done
+        cd ..
+    done
+
+    echo "done"
+}
+main $@

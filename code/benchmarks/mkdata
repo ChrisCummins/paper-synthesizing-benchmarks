@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+./automate
+./cecl2features logs
+./mkfeatures ../../data/benchmarks/kernels logs &>/dev/null
+cp logs/CPU.csv ../../data/benchmarks/cpu.csv
+cp logs/GPU.csv ../../data/benchmarks/gpu.csv
+./mktraining logs/CPU.csv logs/GPU.csv > ../../data/benchmarks/training.csv
