@@ -25,22 +25,27 @@ from sklearn.tree import DecisionTreeClassifier
 
 
 def ingroup(getgroup, d, group):
+    """return true if d is in group"""
     return getgroup(d) == group
 
 
 def getsuite(d):
+    """fetch benchmark suite"""
     return re.match(r"^[a-zA-Z-]+-[0-9\.]+", d["benchmark"]).group(0)
 
 
 def getbenchmark(d):
+    """fetch benchmark name"""
     return re.sub(r"-[^-]+$", "", d["benchmark"])
 
 
 def getprog(d):
+    """fetch program name"""
     return re.match(r"^[a-zA-Z-]+-[0-9\.]+-[^-]+-", d["benchmark"]).group(0)
 
 
 def getclass(d):
+    """fetch optimal device name"""
     return d["oracle"]
 
 
@@ -56,27 +61,14 @@ class GetGroup(object):
         pass
 
 
-def _eigenvectors(data):
-    F1 = data["F1_norm"]
-    F2 = data["F2_norm"]
-    F3 = data["F3_norm"]
-    F4 = data["F4_norm"]
-
-    # Eigenvectors: (hardcoded values as computed by Weka)
-    V1 = - .1881 * F1 + .6796 * F2 - .2141 * F3 - .6760 * F4
-    V2 = - .7282 * F1 - .0004 * F2 + .6852 * F3 + .0149 * F4
-    V3 = - .6590 * F1 - .1867 * F2 - .6958 * F3 - .2161 * F4
-    V4 =   .0063 * F1 + .7095 * F2 + .0224 * F3 - .7044 * F4
-
-    return (V1, V2, V3, V4)
-
-
 def normalize(array):
+    """normalize array values to range [0,1]"""
     factor = np.amax(array)
     return np.copy(array) / factor
 
 
 class LabelledData(object):
+    """dataset with group and normalized features"""
     @staticmethod
     def from_csv(path, group_by=None):
         getgroup = {
@@ -98,6 +90,7 @@ class LabelledData(object):
 
 
 class UnLabelledData(object):
+    """dataset without oracle device results"""
     @staticmethod
     def from_csv(path):
         data = pd.read_csv(smith.assert_exists(path),
@@ -159,9 +152,8 @@ def nearest_neighbours(data1, data2, same_class=False,
     return zip(dists, indices, sameoracles)
 
 
-# feature extractors
-
 def cgo13_features(d):
+    """features used in CGO'13"""
     return np.array([
         d["F1:transfer/(comp+mem)"],
         d["F2:coalesced/mem"],
@@ -216,10 +208,12 @@ def extended_static_features(d):
 
 
 def getlabels(d):
+    """fetch optimal device name"""
     return d["oracle"]
 
 
 class Metrics(object):
+    """classification result metrics"""
     def __init__(self, prefix, data, predicted, model=None):
         self._prefix = prefix
         self._data = data
@@ -327,6 +321,7 @@ class Metrics(object):
 
 
 def getgroups(data, getgroup):
+    """get list of group names"""
     return sorted(list(set([getgroup(d) for d in
                             data.to_dict(orient="records")])))
 
@@ -407,6 +402,7 @@ def run_xval(prefix, clf, data, cv, features=cgo13_features, seed=1):
 
 
 def model(seed=204):
+    """CGO'13 model"""
     return DecisionTreeClassifier(
         random_state=seed, splitter="best", criterion="entropy")
 
@@ -441,6 +437,7 @@ def leave_one_benchmark_out(clf, get_features, D, benchmark):
 
 
 def get_benchmark_names(data, prefix=None):
+    """names of benchmarks"""
     if prefix:
         return sorted(set([
             re.match(r"^([^0-9]+-[0-9\.]+-[^-]+)", b).group(1)
@@ -454,6 +451,7 @@ def get_benchmark_names(data, prefix=None):
 
 
 def xval_benchmarks(clf, data, **benchmark_name_opts):
+    """cross-validate across benchmarks"""
     benchmark_names = get_benchmark_names(data, **benchmark_name_opts)
     return pd.DataFrame(
         flatten([leave_one_benchmark_out(clf, cgo13_features, data, b)
@@ -478,8 +476,7 @@ def classification(train, classifier="DecisionTree",
         "DecisionTree": DecisionTreeClassifier(
             random_state=seed, criterion="entropy", splitter="best"),
         "NaiveBayes": GaussianNB(),
-        "NearestNeighbour": KNeighborsClassifier(n_neighbors=1),
-        "ZeroR": None,  # TODO:
+        "NearestNeighbour": KNeighborsClassifier(n_neighbors=1)
     }
     lookup_table = {
         "DecisionTree": classifiers["DecisionTree"],

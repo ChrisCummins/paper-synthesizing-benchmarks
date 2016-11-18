@@ -16,11 +16,13 @@ from itertools import permutations
 from labm8 import fmt
 from labm8 import fs
 from labm8 import math as labmath
+from labm8 import time
 from labm8 import viz
 from math import sqrt, ceil
 from numpy.random import RandomState
 from random import random
 from random import seed
+from shutil import move
 from sklearn.base import clone
 from sklearn.decomposition import PCA
 from sklearn.neighbors import NearestNeighbors, KNeighborsClassifier
@@ -129,10 +131,12 @@ def shortlabels(groups):
 
 
 def shortbenchmark(benchmark):
+    """short benchmark name"""
     return benchmark.split('-')[-1]
 
 
 def escape_benchmark_name(g):
+    """escape benchmark name for display"""
     c = g.split('-')
     return escape_suite_name(g) + "." + c[-2]
 
@@ -187,10 +191,12 @@ def plot_pca(X, B_out, Bother=None, pca=None):
 
 
 def get_our_model():
-   return KNeighborsClassifier(1)
+    """return extended model"""
+    return KNeighborsClassifier(1)
 
 
 def get_our_features(D):
+    """return extended featureset"""
     return np.array([
         D["comp"].values,
         D["rational"].values,
@@ -207,6 +213,7 @@ def get_our_features(D):
 
 
 def get_raw_features(D):
+    """return raw feature values"""
     return np.array([
         D["comp"].values,
         D["rational"].values,
@@ -220,6 +227,7 @@ def get_raw_features(D):
 
 
 def get_cgo13_features(D):
+    """return features used in CGO'13"""
     return np.array([
         (D["transfer"].values / (D["comp"].values + D["mem"].values)),
         (D["coalesced"].values / D["mem"].values),
@@ -248,15 +256,6 @@ def get_nearest_neighbour_distance(F1, F2):
     nbrs = NearestNeighbors(n_neighbors=1, algorithm='brute').fit(F2)
     distances, indices = nbrs.kneighbors(F1)
     return distances
-
-
-def summarize_distance(distances):
-    return distances
-
-
-def read_file(path):
-    with open(path) as infile:
-        return "".join(infile.read())
 
 
 def complete(condition=True, msg=None):
@@ -464,6 +463,9 @@ def _compare_clfs(clf1, get_features1, clf2, get_features2, D1, D2, benchmark):
 
 
 def plot_speedups_extended_model_2platform(platform_a, platform_b):
+    """
+    Plot speedup of extended model over Grewe et al for 2 platforms
+    """
     aB = pd.read_csv(platform_a[0])
     aB["synthetic"] = np.zeros(len(aB))
     bB = pd.read_csv(platform_b[0])
@@ -590,6 +592,11 @@ def plot_speedups_extended_model_2platform(platform_a, platform_b):
 
 
 def plot_speedups_extended_model(benchmarks_data, clgen_data):
+    """
+    Plots speedups of extended model over Grewe et al
+
+    Returns: speedup
+    """
     B = pd.read_csv(benchmarks_data)
     B["synthetic"] = np.zeros(len(B))
 
