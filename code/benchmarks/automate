@@ -10,6 +10,7 @@ mvlogs() {
     local devname=$2
     local prefix=$3
 
+    mkdir -p "$ROOT/logs/$i/$devname"
     for f in $(ls logs/good/*); do
         mv $f "$ROOT/logs/$i/$devname/$prefix-$(basename $f)"
     done
@@ -20,7 +21,6 @@ runsuite() {
     local suite=$2
     local device=$3
 
-    mkdir -p "$ROOT/logs/$i/$device"
     DEVTYPE=$device ./run
     mvlogs $i "$device" "$suite"
 }
