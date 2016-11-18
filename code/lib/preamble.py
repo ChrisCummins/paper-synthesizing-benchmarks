@@ -11,6 +11,7 @@ import sys
 from collections import Counter, defaultdict, OrderedDict
 from functools import partial
 from io import StringIO
+from IPython.core.display import display, HTML
 from itertools import permutations
 from labm8 import fmt
 from labm8 import fs
@@ -250,4 +251,36 @@ def get_nearest_neighbour_distance(F1, F2):
 
 
 def summarize_distance(distances):
-    return
+    return distances
+
+
+def complete(condition=True, msg=None):
+    """passed/failed display"""
+    if msg is None:
+        msg_html = ""
+    else:
+        msg_html = """
+        <div style="margin-top:-.7em; padding-bottom:.2em;">{msg}</div>
+        """.format(msg=msg)
+
+    if condition:
+        html = """
+<div style="background-color:#5cb85c; color:#fff; text-align:center; border-radius:10px;">
+  <h1 style="padding:.5em; font-weight:400;">&#9745; Complete</h1>
+  {message}
+</div>
+""".format(message=msg_html)
+    else:
+        html = """
+<div style="background-color:#d9534f; color:#fff; text-align:center; border-radius:10px;">
+  <h1 style="padding:.5em; font-weight:400;">&#9746; Failed</h1>
+  {message}
+</div>
+""".format(message=msg_html)
+
+    display(HTML(html))
+
+
+def header(*msg, sep=" "):
+    """html header"""
+    display(HTML("<h1>{msg}</h1>".format(msg=sep.join(msg))))
