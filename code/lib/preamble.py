@@ -254,6 +254,11 @@ def summarize_distance(distances):
     return distances
 
 
+def read_file(path):
+    with open(path) as infile:
+        return "".join(infile.read())
+
+
 def complete(condition=True, msg=None):
     """passed/failed display"""
     if msg is None:
@@ -283,4 +288,387 @@ def complete(condition=True, msg=None):
 
 def header(*msg, sep=" "):
     """html header"""
-    display(HTML("<h1>{msg}</h1>".format(msg=sep.join(msg))))
+    display(HTML("<h3>{msg}</h3>".format(msg=sep.join(msg))))
+
+
+def plot_speedups_with_clgen(benchmarks_data, clgen_data, suite="npb"):
+    """
+    Plot speedups of predictive models trained with and without clgen.
+
+    Returns speedups (without and with).
+    """
+    # datasets: B - benchmarks, S - synthetics, BS - benchmarks + synthetics:
+    B = pd.read_csv(benchmarks_data)
+    B["group"] = ["B"] * len(B)
+
+    S = pd.read_csv(clgen_data)
+    S["group"] = ["S"] * len(S)
+
+    BS = pd.concat((B, S))
+
+    # find the ZeroR. This is the device which is most frequently optimal
+    Bmask = B[B["benchmark"].str.contains(suite)]
+    zeror = Counter(Bmask["oracle"]).most_common(1)[0][0]
+    zeror_runtime = "runtime_" + zeror.lower()
+
+    # get the names of the benchmarks, in the form: $suite-$version-$benchmark
+    benchmark_names = sorted(set([
+        re.match(r"^([^0-9]+-[0-9\.]+-[^-]+)-", b).group(1)
+        for b in B["benchmark"] if b.startswith(suite)
+    ]))
+
+    B_out, BS_out = [], []
+    for benchmark in benchmark_names:
+        clf = cgo13.model()
+        features = get_cgo13_features
+        # cross validate on baseline
+        B_out += cgo13.leave_one_benchmark_out(clf, features, B, benchmark)
+        # reset model
+        clf = cgo13.model()
+        # repeate cross-validation with synthetic kernels
+        BS_out += cgo13.leave_one_benchmark_out(clf, features, BS, benchmark)
+
+    # create results frame
+    R_out = []
+    for b, bs in zip(B_out, BS_out):
+        # get runtimes of device using predicted device
+        b_p_runtime = b["runtime_" + b["p"].lower()]
+        bs_p_runtime = bs["runtime_" + bs["p"].lower()]
+
+        # speedup is the ratio of runtime using the predicted device
+        # over runtime using ZeroR device
+        b["p_speedup"] = b_p_runtime / b[zeror_runtime]
+        bs["p_speedup"] = bs_p_runtime / bs[zeror_runtime]
+
+        if "training" in benchmarks_data:
+            # $benchmark
+            group = escape_benchmark_name(b["benchmark"])
+        else:
+            # $benchmark.$dataset
+            group = re.sub(r"[^-]+-[0-9\.]+-([^-]+)-.+", r"\1",
+                           b["benchmark"]) + "." + b["dataset"]
+        b["group"] = group
+        bs["group"] = group
+
+        # set the training data type
+        b["training"] = "Grewe et al."
+        bs["training"] = "w. CLgen"
+
+        R_out.append(b)
+        R_out.append(bs)
+
+    R = pd.DataFrame(R_out)
+
+    b_mask = R["training"] == "Grewe et al."
+    bs_mask = R["training"] == "w. CLgen"
+
+    B_speedup = labmath.mean(R[b_mask].groupby(["group"])["p_speedup"].mean())
+    BS_speedup = labmath.mean(R[bs_mask].groupby(["group"])["p_speedup"].mean())
+
+    print("  #. benchmarks:                  ",
+          len(set(B["benchmark"])), "kernels,", len(B), "observations")
+    print("  #. synthetic:                   ",
+          len(set(S["benchmark"])), "kernels,", len(S), "observations")
+    print()
+    print("  ZeroR device:                    {}".format(zeror))
+    print()
+    print("  Speedup of Grewe et al.:         {:.2f} x".format(B_speedup))
+    print("  Speedup w. CLgen:                {:.2f} x".format(BS_speedup))
+
+    R = R.append({  # average bars
+        "group": "Average",
+        "p_speedup": B_speedup,
+        "training": "Grewe et al."
+    }, ignore_index=True)
+    R = R.append({
+        "group": "Average",
+        "p_speedup": BS_speedup,
+        "training": "w. CLgen"
+    }, ignore_index=True)
+
+    R["p_speedup"] -= 1  # negative offset so that bars start at 1
+
+    # colors
+    palette = sns.cubehelix_palette(len(set(R["training"])),
+                                    rot=-.4, light=.85, dark=.35)
+
+    ax = sns.barplot(
+        x="group", y="p_speedup", data=R, ci=None, hue="training",
+        palette=palette)
+    plt.ylabel("Speedup")
+    plt.xlabel("")
+
+    plt.axhline(y=0, color="k", lw=1)  # speedup line
+    plt.axvline(x=plt.xlim()[1] - 1, color="k", lw=1, linestyle="--")  # average line
+
+    ax.get_legend().set_title("")  # no legend title
+    plt.legend(loc='upper right')
+    ax.get_legend().draw_frame(True)
+
+    # plot shape and size
+    figsize = (9, 2.2)
+    if "nvidia" in benchmarks_data:
+        typecast = int; plt.ylim(-1, 16)
+    elif "training" in benchmarks_data:
+        typecast = float; figsize = (7, 3.2)
+    else:
+        typecast = float
+
+    # counter negative offset:
+    ax.set_yticklabels([typecast(i) + 1 for i in ax.get_yticks()])
+
+    plt.setp(ax.get_xticklabels(), rotation=90)
+
+    viz.finalise(figsize=figsize, tight=True)
+    return B_speedup, BS_speedup
+
+
+def _compare_clfs(clf1, get_features1, clf2, get_features2, D1, D2, benchmark):
+    """cross-validate across all benchmarks using CGO13 model and our own, with
+    and without synthetic benchmarks. Report per-platform speedup of our model
+    over CGO13"""
+    test1_mask = D1["benchmark"].str.contains(r"^" + benchmark)
+    test2_mask = D2["benchmark"].str.contains(r"^" + benchmark)
+    assert(len(D1[test1_mask]) == len(D2[test2_mask]))
+
+    # create data masks. For training we exclude all results from benchmark
+    train1_mask = ~test1_mask
+    train2_mask = ~test2_mask
+
+    # create training and testing data
+    X1_train = get_features1(D1.loc[train1_mask])
+    X2_train = get_features2(D2.loc[train2_mask])
+    y1_train = cgo13.getlabels(D1[train1_mask])
+    y2_train = cgo13.getlabels(D2[train2_mask])
+
+    D1_test = D1[test1_mask]
+    D2_test = D2[test2_mask]
+    X1_test = get_features1(D1.loc[test1_mask])
+    X2_test = get_features2(D2.loc[test2_mask])
+    y1_test = cgo13.getlabels(D1_test)
+    y2_test = cgo13.getlabels(D2_test)
+
+    clf1.fit(X1_train, y1_train)  # train classifiers
+    clf2.fit(X2_train, y2_train)
+
+    predicted1 = clf1.predict(X1_test)  # make predictions
+    predicted2 = clf2.predict(X2_test)
+
+    D_out = []
+    for d, y, p1, p2 in zip(D1_test.to_dict('records'), y1_test,
+                            predicted1, predicted2):
+        d["p1"], d["p2"] = p1, p2
+        D_out.append(d)
+
+    return D_out  # return a list of dicts
+
+
+def plot_speedups_extended_model_2platform(platform_a, platform_b):
+    aB = pd.read_csv(platform_a[0])
+    aB["synthetic"] = np.zeros(len(aB))
+    bB = pd.read_csv(platform_b[0])
+    bB["synthetic"] = np.zeros(len(bB))
+    B = pd.concat((aB, bB))
+
+    aS = pd.read_csv(platform_a[1])
+    aS["synthetic"] = np.ones(len(aS))
+    bS = pd.read_csv(platform_b[1])
+    bS["synthetic"] = np.ones(len(bS))
+    S = pd.concat((aS, bS))
+
+    aBS = pd.concat((aB, aS))
+    bBS = pd.concat((bB, bS))
+    BS = pd.concat((B, S))
+
+    assert(len(B) == len(aB) + len(bB))  # sanity checks
+    assert(len(S) == len(aS) + len(bS))
+    assert(len(BS) == len(aBS) + len(bBS))
+
+    # get benchmark names: <suite>-<benchmark>
+    benchmark_names = sorted(set([
+        re.match(r"^([^0-9]+-[0-9\.]+-[^-]+)", b).group(1)
+        for b in B["benchmark"]
+    ]))
+
+    # perform cross-validation
+    B_out = []
+    for i, benchmark in enumerate(benchmark_names):
+        print("\ranalyzing", i + 1, benchmark, end="")
+        cgo13_clf, our_clf = cgo13.model(), get_our_model()
+        cgo13_features, our_features = get_cgo13_features, get_our_features
+
+        # cross validate on Grewe et al. and our model
+        tmp = _compare_clfs(cgo13_clf, cgo13_features, our_clf, our_features,
+                            aBS, aBS, benchmark)
+        for d in tmp: d["platform"] = "AMD Tahiti 7970"
+        B_out += tmp
+
+        # reset models
+        cgo13_clf, our_clf = cgo13.model(), get_our_model()
+
+        # same as before, on other platform:
+        tmp = _compare_clfs(cgo13_clf, cgo13_features, our_clf, our_features,
+                            bBS, bBS, benchmark)
+        for d in tmp: d["platform"] = "NVIDIA GTX 970"
+        B_out += tmp
+    print()
+
+    # create results frame
+    R_out = []
+    # get runtimes of device using predicted device
+    for b in B_out:
+        p1_runtime = b["runtime_" + b["p1"].lower()]
+        p2_runtime = b["runtime_" + b["p2"].lower()]
+
+        # speedup is the ratio of runtime using our predicted device
+        # over runtime using CGO13 predicted device.
+        b["p_speedup"] = p2_runtime / p1_runtime
+
+        # get the benchmark name
+        b["group"] = escape_benchmark_name(b["benchmark"])
+
+        R_out.append(b)
+    R = pd.DataFrame(R_out)
+
+    improved = R[R["p_speedup"] > 1]
+
+    Amask = R["platform"] == "AMD Tahiti 7970"
+    Bmask = R["platform"] == "NVIDIA GTX 970"
+    a = R[Amask]
+    b = R[Bmask]
+
+    a_speedups = a.groupby(["group"])["p_speedup"].mean()
+    b_speedups = b.groupby(["group"])["p_speedup"].mean()
+
+    a_speedup = labmath.mean(a_speedups)
+    b_speedup = labmath.mean(b_speedups)
+
+    assert(len(R) == len(a) + len(b))  # sanity-check
+
+    print("  #. benchmarks:          ",
+          len(set(B["benchmark"])), "kernels,", len(B), "observations")
+    print("  #. synthetic:           ",
+          len(set(S["benchmark"])), "kernels,", len(S), "observations")
+    print()
+    print("  Speedup on AMD:          {:.2f} x".format(a_speedup))
+    print("  Speedup on NVIDIA:       {:.2f} x".format(b_speedup))
+
+    palette = sns.cubehelix_palette(
+        len(set(R["platform"])), start=4, rot=.8, light=.8, dark=.3)
+
+    R = R.append({  # average bars
+        "group": "Average",
+        "p_speedup": a_speedup,
+        "platform": "AMD Tahiti 7970"
+    }, ignore_index=True)
+    R = R.append({
+        "group": "Average",
+        "p_speedup": b_speedup,
+        "platform": "NVIDIA GTX 970"
+    }, ignore_index=True)
+
+    R["p_speedup"] -= 1  # negative offset so that bars start at 1
+
+    ax = sns.barplot(x="group", y="p_speedup", hue="platform", data=R,
+                     palette=palette, ci=None)
+
+    plt.ylabel("Speedup over Grewe et al."); plt.xlabel("")
+
+    plt.axhline(y=0, color="k", lw=1)
+    plt.axvline(x=plt.xlim()[1] - 1, color="k", lw=1, linestyle="--")
+    plt.ylim(-1, 9)
+    plt.setp(ax.get_xticklabels(), rotation=90)  # rotate x ticks
+    ax.get_legend().set_title("")  # legend
+    plt.legend(loc='upper right')
+
+    # counter negative offset
+    ax.set_yticklabels([int(i) + 1 for i in ax.get_yticks()])
+
+    ax.get_legend().draw_frame(True)
+
+    viz.finalise(figsize=(9, 4), tight=True)
+
+
+def plot_speedups_extended_model(benchmarks_data, clgen_data):
+    B = pd.read_csv(benchmarks_data)
+    B["synthetic"] = np.zeros(len(B))
+
+    S = pd.read_csv(clgen_data)
+    S["synthetic"] = np.ones(len(S))
+
+    BS = pd.concat((B, S))
+
+    assert(len(BS) == len(B) + len(S))
+
+    # get benchmark names: <suite>-<benchmark>
+    benchmark_names = sorted(set([
+        re.match(r"^([^0-9]+-[0-9\.]+-[^-]+)", b).group(1)
+        for b in B["benchmark"]
+    ]))
+
+    # perform cross-validation
+    B_out = []
+    for i, benchmark in enumerate(benchmark_names):
+        print("\ranalyzing", i + 1, benchmark, end="")
+        cgo13_clf, our_clf = cgo13.model(), get_our_model()
+        cgo13_features, our_features = get_cgo13_features, get_our_features
+
+        # cross validate on Grewe et al. and our model
+        tmp = _compare_clfs(cgo13_clf, cgo13_features, our_clf, our_features,
+                            BS, BS, benchmark)
+        B_out += tmp
+    print()
+
+    # create results frame
+    R_out = []
+    # get runtimes of device using predicted device
+    for b in B_out:
+        p1_runtime = b["runtime_" + b["p1"].lower()]
+        p2_runtime = b["runtime_" + b["p2"].lower()]
+
+        # speedup is the ratio of runtime using our predicted device
+        # over runtime using CGO13 predicted device.
+        b["p_speedup"] = p2_runtime / p1_runtime
+
+        # get the benchmark name
+        b["group"] = escape_benchmark_name(b["benchmark"])
+
+        R_out.append(b)
+    R = pd.DataFrame(R_out)
+
+    improved = R[R["p_speedup"] > 1]
+
+    speedups = R.groupby(["group"])["p_speedup"].mean()
+    speedup = labmath.mean(speedups)
+
+    print("  #. benchmarks:          ",
+          len(set(B["benchmark"])), "kernels,", len(B), "observations")
+    print("  #. synthetic:           ",
+          len(set(S["benchmark"])), "kernels,", len(S), "observations")
+    print()
+    print("  Speedup:                 {:.2f} x".format(speedup))
+
+    palette = sns.cubehelix_palette(1, start=4, rot=.8, light=.8, dark=.3)
+
+    R = R.append({  # average bar
+        "group": "Average",
+        "p_speedup": speedup
+    }, ignore_index=True)
+
+    R["p_speedup"] -= 1  # negative offset so that bars start at 1
+
+    ax = sns.barplot(x="group", y="p_speedup", data=R,
+                     palette=palette, ci=None)
+
+    plt.ylabel("Speedup over Grewe et al."); plt.xlabel("")
+
+    plt.axhline(y=0, color="k", lw=1)
+    plt.axvline(x=plt.xlim()[1] - 1, color="k", lw=1, linestyle="--")
+    plt.ylim(-1, 9)
+    plt.setp(ax.get_xticklabels(), rotation=90)  # rotate x ticks
+
+    # counter negative offset
+    ax.set_yticklabels([int(i) + 1 for i in ax.get_yticks()])
+
+    viz.finalise(figsize=(7, 3.7), tight=True)
+    return speedup

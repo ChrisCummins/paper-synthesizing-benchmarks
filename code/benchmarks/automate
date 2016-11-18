@@ -41,7 +41,7 @@ main() {
 
         for i in $(seq 1 $nmax); do
             echo "$(tput bold)$(tput setaf 2)ITERATION $i of $nmax $suite $device$(tput sgr0) ..."
-            runsuite $i $suite $device
+            runsuite $i $suite $device >/dev/null
         done
         cd ..
     done

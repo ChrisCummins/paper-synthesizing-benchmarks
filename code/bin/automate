@@ -13,7 +13,6 @@ usage() {
     echo "  <benchmarks-dir>  Root of benchmarks directory"
 }
 
-
 main() {
     if [[ $# -ne 3 ]]; then
         usage >&2
@@ -23,6 +22,7 @@ main() {
     local devtype=$1
     local devname=$2
     local benchmarks_dir=$3
+    local print_every=20
 
     local kernels_dir=$benchmarks_dir/kernels
     local results_path=$benchmarks_dir/$devname.csv
@@ -67,8 +67,11 @@ main() {
         i=$((i+1))
         local perc_done=$(echo "($i / $num_jobs) * 100" | bc -l | xargs printf '%.2f%%')
 
-        echo "$(tput bold)$(tput setaf 1)$(date +"%y-%m-%d %H:%M:%S $HOSTNAME")$(tput sgr0) job [$i/$num_jobs] $perc_done ... $devtype $dsize $(basename $file)"
-        date +"%y-%m-%d %H:%M:%S, $HOSTNAME, job [$i/$num_jobs] $perc_done ... $devtype $dsize $(basename $file)" >> /var/log/cldrive.log
+        if [[ $i == 1 ]] || [[ $i == $num_jobs ]] || ! (( $i % $print_every )); then
+            echo "$(tput bold)$(tput setaf 1)$(date +"%y-%m-%d %H:%M:%S $HOSTNAME")$(tput sgr0) job [$i/$num_jobs] $perc_done ... $devtype $dsize $(basename $file)"
+            date +"%y-%m-%d %H:%M:%S, $HOSTNAME, job [$i/$num_jobs] $perc_done ... $devtype $dsize $(basename $file)" >> /var/log/cldrive.log
+        fi
+
         set +e
         ./driver $devtype $dsize $file >> $results_path 2>> $errors_path
         local ret=$?

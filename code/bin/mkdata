@@ -6,5 +6,6 @@
     ../../data/clgen-10/kernels \
     ../../data/clgen-10/cpu.csv \
     ../../data/clgen-10/gpu.csv > ../../data/clgen-10/training.csv
-date +'%T %D' > ../../data/timestamp.txt
+date +'%T %D' > ../../data/clgen-10/timestamp.txt
+echo "completed $(cat ../../data/clgen-10/timestamp.txt)"
 
