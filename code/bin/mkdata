@@ -6,4 +6,5 @@
     ../../data/clgen-10/kernels \
     ../../data/clgen-10/cpu.csv \
     ../../data/clgen-10/gpu.csv > ../../data/clgen-10/training.csv
+date +'%T %D' > ../../data/timestamp.txt
 

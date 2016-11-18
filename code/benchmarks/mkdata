@@ -6,3 +6,4 @@
 cp logs/CPU.csv ../../data/benchmarks/cpu.csv
 cp logs/GPU.csv ../../data/benchmarks/gpu.csv
 ./mktraining logs/CPU.csv logs/GPU.csv > ../../data/benchmarks/training.csv
+date +'%T %D' > ../../benchmarks/timestamp.txt
