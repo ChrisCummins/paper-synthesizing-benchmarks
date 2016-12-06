@@ -34,6 +34,16 @@
 
 **Keywords**  Synthetic program generation, OpenCL, Benchmarking, Deep Learning, GPUs
 
+```
+@inproceedings{cummins2017a,
+  title={Synthesizing Benchmarks for Predictive Modeling},
+  author={Cummins, Chris and Petoumenos, Pavlos and Wang, Zheng and Leather, Hugh},
+  booktitle={CGO},
+  year={2017},
+  organization={IEEE}
+}
+```
+
 ## Acknowledgements
 
 * [@AdamHarries](https://github.com/AdamHarries) for reviewing early drafts of
@@ -48,4 +58,3 @@
   EP/M01567X/1 (SANDeRs),
   EP/M015823/1,
   and EP/M015793/1 (DIVIDEND)
-
