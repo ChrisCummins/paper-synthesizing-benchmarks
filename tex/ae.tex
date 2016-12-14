@@ -15,24 +15,32 @@ using the password \texttt{[redacted]}, and to follow the instructions contained
 \subsubsection{Check-list (artifact meta information)}
 
 {\small
-\begin{itemize}
-  \item {\bf Run-time environment: }A web browser.% We tested with Google Chrome.
-  \item {\bf Output: }OpenCL code, runtimes, figures and tables from the paper.
-  \item {\bf Experiment workflow: }Run (or install locally) Jupyter notebooks; interact with and observe results.
-  \item {\bf Experiment customization: }Edit code in Jupyter notebook; full API and CLI for CLgen.
-  \item {\bf Publicly available?: }Yes, code and data. See:
-  
-\url{http://chriscummins.cc/cgo17/}
-\end{itemize}
+  \begin{itemize}
+    %   \item {\bf Program: }
+    %   \item {\bf Compilation: }
+    %   \item {\bf Transformations: }
+    %   \item {\bf Binary: }
+    %   \item {\bf Data set: }Default datasets for benchmarks.
+    \item {\bf Run-time environment: }A web browser.% We tested with Google Chrome.
+    %   \item {\bf Hardware: }None.
+    %   \item {\bf Run-time state: }
+    %   \item {\bf Execution: }
+    \item {\bf Output: }OpenCL code, runtimes, figures and tables from the paper.
+    \item {\bf Experiment workflow: }Run (or install locally) Jupyter notebooks; interact with and observe results.
+    \item {\bf Experiment customization: }Edit code in Jupyter notebook; full API and CLI for CLgen.
+    \item {\bf Publicly available?: }Yes, code and data. See:
+    
+    \url{http://chriscummins.cc/cgo17/}
+  \end{itemize}
 }
 
 \subsubsection{How delivered}
 
 Jupyter notebooks which contain an annotated version of this paper, interleaved with the code necessary to replicate results. We provide three options to run the Jupyter notebooks:
 \begin{enumerate}
-\item Remote access to the notebook running on our pre-configured experimental platform.
-\item Download our pre-packaged VirtualBox image with Jupyter notebook installed.
-\item Install the project locally on your own machine.
+  \item Remote access to the notebook running on our pre-configured experimental platform.
+  \item Download our pre-packaged VirtualBox image with Jupyter notebook installed.
+  \item Install the project locally on your own machine.
 \end{enumerate}
 
 \subsection{Installation}\label{subsec:installation}
@@ -60,8 +68,8 @@ High system load may lead to inconsistent performance results; this may occur if
 
 Copy our pre-configured 5.21 GB VirtualBox image using:
 \begin{verbatim}
-  $ scp cgo@[redacted]:vm.ova ~
-  Password: [redacted]
+$ scp cgo@[redacted]:vm.ova ~
+Password: [redacted]
 \end{verbatim}
 
 \noindent
@@ -81,26 +89,34 @@ Start the machine and log in using username and password \texttt{cgo}. Once at t
 
 See \url{http://chriscummins.cc/cgo17/} for instructions. Note that we only support Ubuntu 16.04 or OS X, and sudo privileges are required to install the necessary requirements. Other Linux distributions may work but will require extra steps to install the correct package versions.
 
+% \subsubsection{Hardware dependencies}
+%
+% \subsubsection{Software dependencies}
+%
+% \subsubsection{Datasets}
+%
+% {\em Obligatory}
+
 \clearpage
 \subsection{Experiment workflow}\label{subsec:workflow}
 
 \begin{enumerate}
-\item Access the Jupyter notebook server using one of the three options described in Section~\ref{subsec:installation}.
-\item From the Jupyter server page, tick the checkbox next to one of the two notebooks: \texttt{AE.ipynb} for minimal artifact reproduction or \texttt{Paper.ipynb} for a comprehensive interactive paper.
-\item Click the button ``Duplicate''.
-\begin{figure}[H]
-  \includegraphics[width=\columnwidth]{img/notebook}
-\end{figure}
-\item Click on the name of the newly created copy, e.g. \texttt{Paper-Copy1.ipynb} or \texttt{AE-Copy3.ipynb}.
-\begin{figure}[H]
-  \includegraphics[width=\columnwidth]{img/notebook-copy}
-\end{figure}
-\item Repeatedly press the \emph{play} button (tooltip is ``run cell, select below'') to step through each cell of the notebook.
-
-OR select ``Kernel'' > ``Restart \& Run All'' from the menu to run all of the cells in order.
-\begin{figure}[H]
-  \includegraphics[width=\columnwidth]{img/jupyter}
-\end{figure}
+  \item Access the Jupyter notebook server using one of the three options described in Section~\ref{subsec:installation}.
+  \item From the Jupyter server page, tick the checkbox next to one of the two notebooks: \texttt{AE.ipynb} for minimal artifact reproduction or \texttt{Paper.ipynb} for a comprehensive interactive paper.
+  \item Click the button ``Duplicate''.
+  \begin{figure}[H]
+    \includegraphics[width=\columnwidth]{img/notebook}
+  \end{figure}
+  \item Click on the name of the newly created copy, e.g. \texttt{Paper-Copy1.ipynb} or \texttt{AE-Copy3.ipynb}.
+  \begin{figure}[H]
+    \includegraphics[width=\columnwidth]{img/notebook-copy}
+  \end{figure}
+  \item Repeatedly press the \emph{play} button (tooltip is ``run cell, select below'') to step through each cell of the notebook.
+  
+  OR select ``Kernel'' > ``Restart \& Run All'' from the menu to run all of the cells in order.
+  \begin{figure}[H]
+    \includegraphics[width=\columnwidth]{img/jupyter}
+  \end{figure}
 \end{enumerate}
 
 
@@ -131,12 +147,16 @@ Note that some of the cells depend on the values of prior cells and must be exec
 
 CLgen has a documented API and command line interface. You can create new corpuses, train new networks, sample kernels, etc.
 
+
 \subsection{Notes}
 For more information about CLgen, visit:
 
-\url{http://chriscummins.cc/clgen/}
+\url{http://chriscummins.cc/clgen}
 
 \noindent
-Please report bugs and issues at:
+For more information about Artifact Evaluation, visit:
 
-\url{https://github.com/ChrisCummins/clgen/issues}
+\url{http://ctuning.org/ae/submission-20161020.html}
+
+% Fix rendering layout error introduced by flushend package:
+\raggedend
