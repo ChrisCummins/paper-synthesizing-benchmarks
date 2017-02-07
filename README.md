@@ -4,6 +4,11 @@
 [Zheng Wang](http://www.lancaster.ac.uk/staff/wangz3/),
 [Hugh Leather](http://homepages.inf.ed.ac.uk/hleather/).
 
+<a href="https://speakerdeck.com/chriscummins/synthesizing-benchmarks-for-predictive-modelling-cgo-17">
+  <img src="https://raw.githubusercontent.com/ChrisCummins/clgen/master/docs/assets/slides.png" width="500">
+</a>
+
+
 **Abstract**
 > Predictive modeling using machine learning is an effective method for building
 > compiler heuristics, but there is a shortage of benchmarks. Typical machine
@@ -43,6 +48,7 @@
   organization={IEEE}
 }
 ```
+
 
 ## Acknowledgements
 
