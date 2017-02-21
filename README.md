@@ -4,6 +4,8 @@
 [Zheng Wang](http://www.lancaster.ac.uk/staff/wangz3/),
 [Hugh Leather](http://homepages.inf.ed.ac.uk/hleather/).
 
+**Winner of Best Paper Award CGO'17**
+
 <a href="https://speakerdeck.com/chriscummins/synthesizing-benchmarks-for-predictive-modelling-cgo-17">
   <img src="https://raw.githubusercontent.com/ChrisCummins/clgen/master/docs/assets/slides.png" width="500">
 </a>
