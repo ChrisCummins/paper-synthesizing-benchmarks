@@ -7,7 +7,10 @@
 **Winner of Best Paper Award CGO'17**
 
 <a href="https://speakerdeck.com/chriscummins/synthesizing-benchmarks-for-predictive-modelling-cgo-17">
-  <img src="https://raw.githubusercontent.com/ChrisCummins/clgen/master/docs/assets/slides.png" width="500">
+  <img src="https://raw.githubusercontent.com/ChrisCummins/clgen/master/docs/assets/slides.png" height="325">
+</a>
+<a href="https://github.com/ChrisCummins/paper-synthesizing-benchmarks/raw/master/paper.pdf">
+  <img src="paper.png" height="325">
 </a>
 
 
