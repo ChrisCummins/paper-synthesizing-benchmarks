@@ -11,20 +11,20 @@ A \emph{payload} encapsulates all of the arguments of an OpenCL compute kernel. 
 For the purpose of performance benchmarking we are not interested in the correctness of computed values, but we define a class of programs as performing \emph{useful work} if they predictably compute some result. We devised a low-overhead runtime behavior check to validate that a synthesized program does useful work based on the outcome of four executions of a tested program:%
 %
 \begin{enumerate}
-\item Create 4 equal size payloads $A_{1in}$, $B_{1in}$, $A_{2in}$,
+  \item Create 4 equal size payloads $A_{1in}$, $B_{1in}$, $A_{2in}$,
   $B_{2in}$, subject to restrictions: $A_{1in}=A_{2in}$,
   $B_{1in}=B_{2in}$, $A_{1in} \ne B_{1in}$.
-\item Execute kernel $k$ 4 times: $k(A_{1in}) \rightarrow A_{1out}$,
+  \item Execute kernel $k$ 4 times: $k(A_{1in}) \rightarrow A_{1out}$,
   $k(B_{1in}) \rightarrow B_{1out}$,
   $k(A_{2in}) \rightarrow A_{2out}$,
   $k(B_{2in}) \rightarrow B_{2out}$.
-\item Assert:
+  \item Assert:
   \begin{itemize}
-  \item $A_{1out} \ne A_{1in}$ and $B_{1out} \ne B_{1in}$, else $k$ has no
-  output (for these inputs).%
-  \item $A_{1out} \ne B_{1out}$ and $A_{2out} \ne B_{2out}$, else $k$ is input insensitive t (for these inputs).%
-  \item $A_{1out}=A_{2out}$ and $B_{1out}=B_{2out}$, else $k$ is
-  non-deterministic.
+    \item $A_{1out} \ne A_{1in}$ and $B_{1out} \ne B_{1in}$, else $k$ has no
+    output (for these inputs).%
+    \item $A_{1out} \ne B_{1out}$ and $A_{2out} \ne B_{2out}$, else $k$ is input insensitive t (for these inputs).%
+    \item $A_{1out}=A_{2out}$ and $B_{1out}=B_{2out}$, else $k$ is
+    non-deterministic.
   \end{itemize}
 \end{enumerate}
 %

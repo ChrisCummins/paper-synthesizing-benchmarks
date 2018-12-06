@@ -9,13 +9,14 @@ We evaluate the effectiveness of our approach on two heterogeneous systems. We f
 \begin{figure*}
   \centering %
   \subfloat[][AMD Tahiti 7970]{%
-    \includegraphics[width=\textwidth]{img/ex1-A}%
-    \label{fig:npb-amd}}\\%
+  \includegraphics[width=\textwidth]{img/ex1-A}%
+  \label{fig:npb-amd}}\\%
   \subfloat[][NVIDIA GTX 970]{%
-    \includegraphics[width=\textwidth]{img/ex1-B}%
-    \label{fig:npb-nvidia}}%
+  \includegraphics[width=\textwidth]{img/ex1-B}%
+  \label{fig:npb-nvidia}}%
   \caption{Speedup of programs using \emph{Grewe et al.\ }predictive model with and without synthetic benchmarks. The predictive model outperforms the best static device mapping by a factor of $1.26\times$ on AMD and $2.50\times$ on NVIDIA. The addition of synthetic benchmarks improves the performance to $1.57\times$ on AMD and $3.26\times$ on NVIDIA.}%
-  \label{fig:npb} %
+  \label{fig:npb}
+  %
 \end{figure*}
 
 Figure~\ref{fig:npb} shows speedups of the \emph{Grewe et al.\ }predictive model over the NAS Parallel Benchmark suite with and without the addition of synthesized benchmarks for training. Speedups are calculated relative to the best single-device mapping for each experimental platform, which is CPU-only
@@ -27,9 +28,9 @@ The strongest performance improvements are on NVIDIA with the \texttt{FT} benchm
 \label{subsec:eval-extended}
 
 \lstinputlisting[%
-  label=lst:zero-b,%
-  float,%
-  caption={In the \emph{Grewe et al.\ }feature space this CLgen program is indistinguishable from AMD's Fast Walsh–Hadamard transform benchmark, but has very different runtime behavior and optimal device mapping. The addition of a branching feature fixes this.}%
+label=lst:zero-b,%
+float,%
+caption={In the \emph{Grewe et al.\ }feature space this CLgen program is indistinguishable from AMD's Fast Walsh–Hadamard transform benchmark, but has very different runtime behavior and optimal device mapping. The addition of a branching feature fixes this.}%
 ]{lst/zero-b}
 
 Feature designers are bound to select as features only properties which are significant for the sparse benchmarks they test on, which can limit a model's ability to generalize over a wider range of programs. We found this to be the case with the \emph{Grewe et al.\ }model. The addition of automatically generated programs exposed two distinct cases where the model failed to generalize as a result of overspecializing to the NPB suite.
@@ -44,7 +45,8 @@ Figure~\ref{fig:ex2} shows speedups of our extended model across all seven of th
   \centering%
   \includegraphics[width=1\textwidth]{img/ex2}%
   \caption{Speedups of predictions using our extended model over \emph{Grewe et al.\ }on both experimental platforms. Synthetic benchmarks and the additional program features outperform the original predictive model by a factor $3.56\times$ on AMD and $5.04\times$ on NVIDIA.}%
-  \label{fig:ex2}%
+  \label{fig:ex2}
+  %
 \end{figure*}
 
 \subsection{Comparison of Source Features}%

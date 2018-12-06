@@ -6,7 +6,7 @@
 
 Our research artifact consists of interactive Jupyter notebooks. For your convenience, we provide two methods of validating our results: an `AE' notebook which validates the main experiments of the paper, and a comprehensive `Paper' notebook which replicates every experiment of the paper, including additional analysis. The most convenient method to evaluate our results is to access our pre-configured live server:
 \begin{verbatim}
-http://[redacted]:8888/notebooks/AE.ipynb
+  http://[redacted]:8888/notebooks/AE.ipynb
 \end{verbatim}
 using the password \texttt{[redacted]}, and to follow the instructions contained within.
 
@@ -15,23 +15,23 @@ using the password \texttt{[redacted]}, and to follow the instructions contained
 \subsubsection{Check-list (Artifact Meta Information)}
 
 {\small
-  \begin{itemize}
-    %   \item {\bf Program: }
-    %   \item {\bf Compilation: }
-    %   \item {\bf Transformations: }
-    %   \item {\bf Binary: }
-    %   \item {\bf Data set: }Default datasets for benchmarks.
-    \item {\bf Run-time environment: }A web browser.% We tested with Google Chrome.
-    %   \item {\bf Hardware: }None.
-    %   \item {\bf Run-time state: }
-    %   \item {\bf Execution: }
-    \item {\bf Output: }OpenCL code, runtimes, figures and tables from the paper.
-    \item {\bf Experiment workflow: }Run (or install locally) Jupyter notebooks; interact with and observe results.
-    \item {\bf Experiment customization: }Edit code in Jupyter notebook; full API and CLI for CLgen.
-    \item {\bf Publicly available?: }Yes, code and data. See:
-    
-    \url{http://chriscummins.cc/cgo17/}
-  \end{itemize}
+\begin{itemize}
+  %   \item {\bf Program: }
+  %   \item {\bf Compilation: }
+  %   \item {\bf Transformations: }
+  %   \item {\bf Binary: }
+  %   \item {\bf Data set: }Default datasets for benchmarks.
+  \item {\bf Run-time environment: }A web browser.% We tested with Google Chrome.
+  %   \item {\bf Hardware: }None.
+  %   \item {\bf Run-time state: }
+  %   \item {\bf Execution: }
+  \item {\bf Output: }OpenCL code, runtimes, figures and tables from the paper.
+  \item {\bf Experiment workflow: }Run (or install locally) Jupyter notebooks; interact with and observe results.
+  \item {\bf Experiment customization: }Edit code in Jupyter notebook; full API and CLI for CLgen.
+  \item {\bf Publicly available?: }Yes, code and data. See:
+
+  \url{http://chriscummins.cc/cgo17/}
+\end{itemize}
 }
 
 \subsubsection{How Delivered}
@@ -75,12 +75,12 @@ Password: [redacted]
 \noindent
 Install the virtual machine using VirtualBox's ``Import Appliance'' command:
 \begin{figure}[H]
-  \includegraphics[width=\columnwidth]{img/vm1}
+\includegraphics[width=\columnwidth]{img/vm1}
 \end{figure}
 \noindent
 The image was prepared using VirtualBox 5.1.8. It has the following configuration: Ubuntu 16.04, 4 GB RAM, 10 GB hard drive, bridged network adapter with DHCP, US keyboard layout, GMT timezone.
 \begin{figure}[H]
-  \includegraphics[width=\columnwidth]{img/vm2}
+\includegraphics[width=\columnwidth]{img/vm2}
 \end{figure}
 \noindent
 Start the machine and log in using username and password \texttt{cgo}. Once at the shell, run \texttt{launch}. This will start the Jupyter notebook server and print its address. You can access the notebooks at this address using the browser of the host device. Please note that the VirtualBox image does not have OpenCL, so new runtimes cannot be generated.
@@ -101,22 +101,22 @@ See \url{http://chriscummins.cc/cgo17/} for instructions. Note that we only supp
 \subsection{Experiment Workflow}\label{subsec:workflow}
 
 \begin{enumerate}
-  \item Access the Jupyter notebook server using one of the three options described in Section~\ref{subsec:installation}.
-  \item From the Jupyter server page, tick the checkbox next to one of the two notebooks: \texttt{AE.ipynb} for minimal artifact reproduction or \texttt{Paper.ipynb} for a comprehensive interactive paper.
-  \item Click the button ``Duplicate''.
-  \begin{figure}[H]
-    \includegraphics[width=\columnwidth]{img/notebook}
-  \end{figure}
-  \item Click on the name of the newly created copy, e.g. \texttt{Paper-Copy1.ipynb} or \texttt{AE-Copy3.ipynb}.
-  \begin{figure}[H]
-    \includegraphics[width=\columnwidth]{img/notebook-copy}
-  \end{figure}
-  \item Repeatedly press the \emph{play} button (tooltip is ``run cell, select below'') to step through each cell of the notebook.
-  
-  OR select ``Kernel'' > ``Restart \& Run All'' from the menu to run all of the cells in order.
-  \begin{figure}[H]
-    \includegraphics[width=\columnwidth]{img/jupyter}
-  \end{figure}
+\item Access the Jupyter notebook server using one of the three options described in Section~\ref{subsec:installation}.
+\item From the Jupyter server page, tick the checkbox next to one of the two notebooks: \texttt{AE.ipynb} for minimal artifact reproduction or \texttt{Paper.ipynb} for a comprehensive interactive paper.
+\item Click the button ``Duplicate''.
+\begin{figure}[H]
+\includegraphics[width=\columnwidth]{img/notebook}
+\end{figure}
+\item Click on the name of the newly created copy, e.g. \texttt{Paper-Copy1.ipynb} or \texttt{AE-Copy3.ipynb}.
+\begin{figure}[H]
+\includegraphics[width=\columnwidth]{img/notebook-copy}
+\end{figure}
+\item Repeatedly press the \emph{play} button (tooltip is ``run cell, select below'') to step through each cell of the notebook.
+
+OR select ``Kernel'' > ``Restart \& Run All'' from the menu to run all of the cells in order.
+\begin{figure}[H]
+\includegraphics[width=\columnwidth]{img/jupyter}
+\end{figure}
 \end{enumerate}
 
 
@@ -132,14 +132,14 @@ We include both the code necessary to evaluate the data used in the paper, and t
 The experiments are fully customizable. The Jupyter notebook can be edited ``on the fly''. Simply type your changes into the cells and re-run them. For example, in Table 1 of the \texttt{Paper.ipyn} notebook we cross-validate the performance of predictive models on an AMD GPU:
 
 \begin{figure}[H]
-  \includegraphics[width=\columnwidth]{img/example-1}
+\includegraphics[width=\columnwidth]{img/example-1}
 \end{figure}
 
 \noindent
 To replicate this experiment using the NVIDIA GPU, change the first line of the appropriate code cell to read \texttt{data = nvidia\_benchmarks} and re-run the cell:
 
 \begin{figure}[H]
-  \includegraphics[width=\columnwidth]{img/example-2}
+\includegraphics[width=\columnwidth]{img/example-2}
 \end{figure}
 
 \noindent

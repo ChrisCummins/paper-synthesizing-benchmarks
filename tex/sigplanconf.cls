@@ -42,14 +42,14 @@
 
 % The following few pages contain LaTeX programming extensions adapted
 % from the ZzTeX macro package.
-
+
 %                       Token Hackery
 %                       ----- -------
 
 
 \def \@expandaftertwice {\expandafter\expandafter\expandafter}
 \def \@expandafterthrice {\expandafter\expandafter\expandafter\expandafter
-                          \expandafter\expandafter\expandafter}
+\expandafter\expandafter\expandafter}
 
 % This macro discards the next token.
 
@@ -67,17 +67,17 @@
 % Usage: \expandafter\@defof \meaning\macro\@mark
 
 \def \@defof #1:->#2\@mark{#2}
-
+
 %                       Control Sequence Names
 %                       ------- -------- -----
 
 
 \def \@name #1{%                                        {\tokens}
-  \csname \expandafter\@discardtok \string#1\endcsname}
+\csname \expandafter\@discardtok \string#1\endcsname}
 
 \def \@withname #1#2{%                                  {\command}{\tokens}
-  \expandafter#1\csname \expandafter\@discardtok \string#2\endcsname}
-
+\expandafter#1\csname \expandafter\@discardtok \string#2\endcsname}
+
 %                       Flags (Booleans)
 %                       ----- ----------
 
@@ -88,7 +88,7 @@
 \def \@false {FL}
 
 \def \@setflag #1=#2{\edef #1{#2}}%              \flag = boolean
-
+
 %                       IF and Predicates
 %                       -- --- ----------
 
@@ -117,7 +117,7 @@
 \def \@oddp   #1{\ifodd #1\@true \else \@false \fi}
 \def \@evenp  #1{\ifodd #1\@false \else \@true \fi}
 \def \@rangep #1#2#3{\if \@orp{\@lssp{#1}{#2}}{\@gtrp{#1}{#3}}\@false \else
-                                                          \@true \fi}
+\@true \fi}
 \def \@tensp  #1{\@rangep{#1}{10}{19}}
 
 \def \@dimeqlp   #1#2{\ifdim #1 = #2\@true \else \@false \fi}
@@ -142,25 +142,25 @@
 \long\def \@xtokeqlp #1#2{\expandafter\ifx #1#2\@true \else \@false \fi}
 
 \long\def \@definedp #1{%
-  \expandafter\ifx \csname \expandafter\@discardtok \string#1\endcsname
-                   \relax \@false \else \@true \fi}
+\expandafter\ifx \csname \expandafter\@discardtok \string#1\endcsname
+\relax \@false \else \@true \fi}
 
 \long\def \@undefinedp #1{%
-  \expandafter\ifx \csname \expandafter\@discardtok \string#1\endcsname
-                   \relax \@true \else \@false \fi}
+\expandafter\ifx \csname \expandafter\@discardtok \string#1\endcsname
+\relax \@true \else \@false \fi}
 
 \def \@emptydefp #1{\ifx #1\@empty \@true \else \@false \fi}%       {\name}
 
 \let \@emptylistp = \@emptydefp
 
 \long\def \@emptyargp #1{%                               {#n}
-  \@empargp #1\@empargq\@mark}
+\@empargp #1\@empargq\@mark}
 \long\def \@empargp #1#2\@mark{%
-  \ifx #1\@empargq \@true \else \@false \fi}
+\ifx #1\@empargq \@true \else \@false \fi}
 \def \@empargq {\@empargq}
 
 \def \@emptytoksp #1{%                                   {\tokenreg}
-  \expandafter\@emptoksp \the#1\@mark}
+\expandafter\@emptoksp \the#1\@mark}
 
 \long\def \@emptoksp #1\@mark{\@emptyargp{#1}}
 
@@ -181,30 +181,30 @@
 \def \@notp #1{\if #1\@false \else \@true \fi}
 
 \def \@andp #1#2{\if #1%
-                  \if #2\@true \else \@false \fi
-                \else
-                  \@false
-                \fi}
+\if #2\@true \else \@false \fi
+\else
+\@false
+\fi}
 
 \def \@orp #1#2{\if #1%
-                 \@true
-               \else
-                 \if #2\@true \else \@false \fi
-               \fi}
+\@true
+\else
+\if #2\@true \else \@false \fi
+\fi}
 
 \def \@xorp #1#2{\if #1%
-                  \if #2\@false \else \@true \fi
-                \else
-                  \if #2\@true \else \@false \fi
-                \fi}
-
+\if #2\@false \else \@true \fi
+\else
+\if #2\@true \else \@false \fi
+\fi}
+
 %                       Arithmetic
 %                       ----------
 
 \def \@increment #1{\advance #1 by 1\relax}%             {\count}
 
 \def \@decrement #1{\advance #1 by -1\relax}%            {\count}
-
+
 %                       Options
 %                       -------
 
@@ -227,16 +227,16 @@
 % Note that all the dangerous article class options are trapped.
 
 \DeclareOption{9pt}{\@setflag \@ninepoint = \@true
-                    \@setflag \@explicitsize = \@true}
+\@setflag \@explicitsize = \@true}
 
 \DeclareOption{10pt}{\PassOptionsToClass{10pt}{article}%
-                     \@setflag \@ninepoint = \@false
-                     \@setflag \@tenpoint = \@true
-                     \@setflag \@explicitsize = \@true}
+\@setflag \@ninepoint = \@false
+\@setflag \@tenpoint = \@true
+\@setflag \@explicitsize = \@true}
 
 \DeclareOption{11pt}{\PassOptionsToClass{11pt}{article}%
-                     \@setflag \@ninepoint = \@false
-                     \@setflag \@explicitsize = \@true}
+\@setflag \@ninepoint = \@false
+\@setflag \@explicitsize = \@true}
 
 \DeclareOption{12pt}{\@unsupportedoption{12pt}}
 
@@ -299,34 +299,34 @@
 \ProcessOptions
 
 \if \@onecolumn
-  \if \@notp{\@explicitsize}%
-    \@setflag \@ninepoint = \@false
-    \PassOptionsToClass{11pt}{article}%
-  \fi
-  \PassOptionsToClass{twoside,onecolumn}{article}
+\if \@notp{\@explicitsize}%
+\@setflag \@ninepoint = \@false
+\PassOptionsToClass{11pt}{article}%
+\fi
+\PassOptionsToClass{twoside,onecolumn}{article}
 \else
-  \PassOptionsToClass{twoside,twocolumn}{article}
+\PassOptionsToClass{twoside,twocolumn}{article}
 \fi
 \LoadClass{article}
 
 \def \@unsupportedoption #1{%
-  \ClassError{proc}{The standard '#1' option is not supported.}}
+\ClassError{proc}{The standard '#1' option is not supported.}}
 
 % This can be used with the 'reprint' option to get the final folios.
 
 \def \setpagenumber #1{%
-  \setcounter{page}{#1}}
+\setcounter{page}{#1}}
 
 \AtEndDocument{\label{sigplanconf@finalpage}}
-
+
 %                       Utilities
 %                       ---------
 
 
 \newcommand{\setvspace}[2]{%
-  #1 = #2
-  \advance #1 by -1\parskip}
-
+#1 = #2
+\advance #1 by -1\parskip}
+
 %                       Document Parameters
 %                       -------- ----------
 
@@ -341,11 +341,11 @@
 \setlength{\headsep}{0pt}
 
 \if \@onecolumn
-  \setlength{\evensidemargin}{.75in}
-  \setlength{\oddsidemargin}{.75in}
+\setlength{\evensidemargin}{.75in}
+\setlength{\oddsidemargin}{.75in}
 \else
-  \setlength{\evensidemargin}{.75in}
-  \setlength{\oddsidemargin}{.75in}
+\setlength{\evensidemargin}{.75in}
+\setlength{\oddsidemargin}{.75in}
 \fi
 
 % Text area:
@@ -354,9 +354,9 @@
 \setlength{\standardtextwidth}{42pc}
 
 \if \@onecolumn
-  \setlength{\textwidth}{40.5pc}
+\setlength{\textwidth}{40.5pc}
 \else
-  \setlength{\textwidth}{\standardtextwidth}
+\setlength{\textwidth}{\standardtextwidth}
 \fi
 
 \setlength{\topskip}{8pt}
@@ -370,11 +370,11 @@
 % Paragraphs:
 
 \if \@blockstyle
-  \setlength{\parskip}{5pt plus .1pt minus .5pt}
-  \setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus .1pt minus .5pt}
+\setlength{\parindent}{0pt}
 \else
-  \setlength{\parskip}{0pt}
-  \setlength{\parindent}{12pt}
+\setlength{\parskip}{0pt}
+\setlength{\parindent}{12pt}
 \fi
 
 \setlength{\lineskip}{.5pt}
@@ -404,10 +404,10 @@
 \setlength{\footnotesep}{9pt}
 
 \renewcommand{\footnoterule}{%
-  \hrule width .5\columnwidth height .33pt depth 0pt}
+\hrule width .5\columnwidth height .33pt depth 0pt}
 
 \renewcommand{\@makefntext}[1]{%
-  \noindent \@makefnmark \hspace{1pt}#1}
+\noindent \@makefnmark \hspace{1pt}#1}
 
 % Floats:
 
@@ -437,48 +437,48 @@
 % Miscellaneous:
 
 \errorcontextlines = 5
-
+
 %                       Fonts
 %                       -----
 
 
 \if \@times
-  \renewcommand{\rmdefault}{ptm}%
-  \if \@mathtime
-    \usepackage[mtbold,noTS1]{mathtime}%
-  \else
-%%%    \usepackage{mathptmx}%
-  \fi
+\renewcommand{\rmdefault}{ptm}%
+\if \@mathtime
+\usepackage[mtbold,noTS1]{mathtime}%
 \else
-  \relax
+%%%    \usepackage{mathptmx}%
+\fi
+\else
+\relax
 \fi
 
 \if \@ninepoint
 
 \renewcommand{\normalsize}{%
-  \@setfontsize{\normalsize}{9pt}{10pt}%
-  \setlength{\abovedisplayskip}{5pt plus 1pt minus .5pt}%
-  \setlength{\belowdisplayskip}{\abovedisplayskip}%
-  \setlength{\abovedisplayshortskip}{3pt plus 1pt minus 2pt}%
-  \setlength{\belowdisplayshortskip}{\abovedisplayshortskip}}
+\@setfontsize{\normalsize}{9pt}{10pt}%
+\setlength{\abovedisplayskip}{5pt plus 1pt minus .5pt}%
+\setlength{\belowdisplayskip}{\abovedisplayskip}%
+\setlength{\abovedisplayshortskip}{3pt plus 1pt minus 2pt}%
+\setlength{\belowdisplayshortskip}{\abovedisplayshortskip}}
 
 \renewcommand{\tiny}{\@setfontsize{\tiny}{5pt}{6pt}}
 
 \renewcommand{\scriptsize}{\@setfontsize{\scriptsize}{7pt}{8pt}}
 
 \renewcommand{\small}{%
-  \@setfontsize{\small}{8pt}{9pt}%
-  \setlength{\abovedisplayskip}{4pt plus 1pt minus 1pt}%
-  \setlength{\belowdisplayskip}{\abovedisplayskip}%
-  \setlength{\abovedisplayshortskip}{2pt plus 1pt}%
-  \setlength{\belowdisplayshortskip}{\abovedisplayshortskip}}
+\@setfontsize{\small}{8pt}{9pt}%
+\setlength{\abovedisplayskip}{4pt plus 1pt minus 1pt}%
+\setlength{\belowdisplayskip}{\abovedisplayskip}%
+\setlength{\abovedisplayshortskip}{2pt plus 1pt}%
+\setlength{\belowdisplayshortskip}{\abovedisplayshortskip}}
 
 \renewcommand{\footnotesize}{%
-  \@setfontsize{\footnotesize}{8pt}{9pt}%
-  \setlength{\abovedisplayskip}{4pt plus 1pt minus .5pt}%
-  \setlength{\belowdisplayskip}{\abovedisplayskip}%
-  \setlength{\abovedisplayshortskip}{2pt plus 1pt}%
-  \setlength{\belowdisplayshortskip}{\abovedisplayshortskip}}
+\@setfontsize{\footnotesize}{8pt}{9pt}%
+\setlength{\abovedisplayskip}{4pt plus 1pt minus .5pt}%
+\setlength{\belowdisplayskip}{\abovedisplayskip}%
+\setlength{\abovedisplayshortskip}{2pt plus 1pt}%
+\setlength{\belowdisplayshortskip}{\abovedisplayshortskip}}
 
 \renewcommand{\large}{\@setfontsize{\large}{11pt}{13pt}}
 
@@ -499,16 +499,16 @@
 \relax
 
 \fi\fi
-
+
 %                       Abstract
 %                       --------
 
 
 \renewenvironment{abstract}{%
-  \section*{Abstract}%
-  \normalsize}{%
-  }
-
+\section*{Abstract}%
+\normalsize}{%
+}
+
 %                       Bibliography
 %                       ------------
 
@@ -559,25 +559,25 @@
 \@setflag \@firstcategory = \@true
 
 \newcommand{\category}[3]{%
-  \if \@firstcategory
-    \paragraph*{Categories and Subject Descriptors}%
-    \@setflag \@firstcategory = \@false
-  \else
-    \unskip ;\hspace{.75em}%
-  \fi
-  \@ifnextchar [{\@category{#1}{#2}{#3}}{\@category{#1}{#2}{#3}[]}}
+\if \@firstcategory
+\paragraph*{Categories and Subject Descriptors}%
+\@setflag \@firstcategory = \@false
+\else
+\unskip ;\hspace{.75em}%
+\fi
+\@ifnextchar [{\@category{#1}{#2}{#3}}{\@category{#1}{#2}{#3}[]}}
 
 \def \@category #1#2#3[#4]{%
-  {\let \and = \relax
-   #1 [\textit{#2}]%
-   \if \@emptyargp{#4}%
-     \if \@notp{\@emptyargp{#3}}: #3\fi
-   \else
-     :\space
-     \if \@notp{\@emptyargp{#3}}#3---\fi
-     \textrm{#4}%
-   \fi}}
-
+{\let \and = \relax
+#1 [\textit{#2}]%
+\if \@emptyargp{#4}%
+\if \@notp{\@emptyargp{#3}}: #3\fi
+\else
+:\space
+\if \@notp{\@emptyargp{#3}}#3---\fi
+\textrm{#4}%
+\fi}}
+
 %                       Copyright Notice
 %                       --------- ------
 
@@ -588,122 +588,122 @@
 \def \@reprintprice {}
 
 \def \@copyrightspace {%
-  \@float{copyrightbox}[b]%
-  \vbox to 1in{%
-    \vfill
-    \parbox[b]{20pc}{%
-      \tiny
-      \if \@preprint
-        [Copyright notice will appear here
-         once 'preprint' option is removed.]\par
-      \else
-        \@toappear
-      \fi
-      \if \@reprint
-        \noindent Reprinted from \@conferencename,
-        \@proceedings,
-        \@conferenceinfo,
-        pp.~\number\thepage--\pageref{sigplanconf@finalpage}.\par
-      \fi}}%
-  \end@float}
+\@float{copyrightbox}[b]%
+\vbox to 1in{%
+\vfill
+\parbox[b]{20pc}{%
+\tiny
+\if \@preprint
+[Copyright notice will appear here
+once 'preprint' option is removed.]\par
+\else
+\@toappear
+\fi
+\if \@reprint
+\noindent Reprinted from \@conferencename,
+\@proceedings,
+\@conferenceinfo,
+pp.~\number\thepage--\pageref{sigplanconf@finalpage}.\par
+\fi}}%
+\end@float}
 
 \long\def \toappear #1{%
-  \def \@toappear {#1}}
+\def \@toappear {#1}}
 
 \toappear{%
-  \if \@andp{\@legacycopyright}{\@emptydefp{\@permission}}%
-    \noindent (No legacy permission statement was specified.)\par
-  \else
-    \noindent \@permission \par
-  \fi
-  \vspace{2pt}
-  \noindent \textsl{\@conferencename}\quad \@conferenceinfo \par
-  \noindent Copyright \copyright\ \@copyrightyear\ ACM \@copyrightdata
-    \dots \@reprintprice\par
-  \setcopyrightdoi}
+\if \@andp{\@legacycopyright}{\@emptydefp{\@permission}}%
+\noindent (No legacy permission statement was specified.)\par
+\else
+\noindent \@permission \par
+\fi
+\vspace{2pt}
+\noindent \textsl{\@conferencename}\quad \@conferenceinfo \par
+\noindent Copyright \copyright\ \@copyrightyear\ ACM \@copyrightdata
+\dots \@reprintprice\par
+\setcopyrightdoi}
 
 \def \publicationrights #1{%                                    {type}
-  \if \@definedp{\rightsstatement#1}%
-    \gdef \@toappear {\@name{\rightsstatement#1}}%
-  \else
-    \@latex@error{The publication right '#1' is invalid}{}%
-  \fi}
+\if \@definedp{\rightsstatement#1}%
+\gdef \@toappear {\@name{\rightsstatement#1}}%
+\else
+\@latex@error{The publication right '#1' is invalid}{}%
+\fi}
 
 \expandafter\def \csname rightsstatementauthor-pays\endcsname{%
-  \noindent
-  Permission to make digital or hard copies of part or all of this work for
-  personal or classroom use is granted without fee provided that copies are
-  not made or distributed for profit or commercial advantage and that copies
-  bear this notice and the full citation on the first page. Copyrights for
-  third-party components of this work must be honored. For all other uses,
-  contact the Owner/Author(s). \par
-  \vspace{2pt}
-  \noindent \textsl{\@conferencename}\quad \@conferenceinfo \par
-  \noindent Copyright \copyright\ \@copyrightyear\ held by owner/author(s). \par
-  ACM \@copyrightdata \dots \@reprintprice\par
-  \setcopyrightdoi}
+\noindent
+Permission to make digital or hard copies of part or all of this work for
+personal or classroom use is granted without fee provided that copies are
+not made or distributed for profit or commercial advantage and that copies
+bear this notice and the full citation on the first page. Copyrights for
+third-party components of this work must be honored. For all other uses,
+contact the Owner/Author(s). \par
+\vspace{2pt}
+\noindent \textsl{\@conferencename}\quad \@conferenceinfo \par
+\noindent Copyright \copyright\ \@copyrightyear\ held by owner/author(s). \par
+ACM \@copyrightdata \dots \@reprintprice\par
+\setcopyrightdoi}
 
 % This is the default rights statement.
 
 \def \rightsstatementlicensed {%
-  \noindent
-  Permission to make digital or hard copies of part or all of this work for
-  personal or classroom use is granted without fee provided that copies are
-  not made or distributed for profit or commercial advantage and that copies
-  bear this notice and the full citation on the first page. Copyrights for
-  components of this work owned by others than ACM must be honored.
-  Abstracting with credit is permitted. To copy otherwise, to republish, to
-  post on servers, or to redistribute to lists, contact the Owner/Author(s).
-  Request permissions from permissions@acm.org or Publications Dept., ACM,
-  Inc., fax +1~(212) 869-0481. \par
-  \vspace{2pt}
-  \noindent \textsl{\@conferencename}\quad \@conferenceinfo \par
-  \noindent Copyright \copyright\ \@copyrightyear\ held by owner/author(s).
-  Publication rights licensed to ACM. \par
-  ACM \@copyrightdata \dots \@reprintprice\par
-  \setcopyrightdoi}
+\noindent
+Permission to make digital or hard copies of part or all of this work for
+personal or classroom use is granted without fee provided that copies are
+not made or distributed for profit or commercial advantage and that copies
+bear this notice and the full citation on the first page. Copyrights for
+components of this work owned by others than ACM must be honored.
+Abstracting with credit is permitted. To copy otherwise, to republish, to
+post on servers, or to redistribute to lists, contact the Owner/Author(s).
+Request permissions from permissions@acm.org or Publications Dept., ACM,
+Inc., fax +1~(212) 869-0481. \par
+\vspace{2pt}
+\noindent \textsl{\@conferencename}\quad \@conferenceinfo \par
+\noindent Copyright \copyright\ \@copyrightyear\ held by owner/author(s).
+Publication rights licensed to ACM. \par
+ACM \@copyrightdata \dots \@reprintprice\par
+\setcopyrightdoi}
 
 \if \@notp{\@legacycopyright}%
-  \publicationrights{licensed}%
+\publicationrights{licensed}%
 \fi
 
 \def \rightsstatementtransferred {%
-  \noindent
-  Permission to make digital or hard copies of part or all of this work for
-  personal or classroom use is granted without fee provided that copies are
-  not made or distributed for profit or commercial advantage and that copies
-  bear this notice and the full citation on the first page. Copyrights for
-  components of this work owned by others than ACM must be honored.
-  Abstracting with credit is permitted. To copy otherwise, to republish, to
-  post on servers, or to redistribute to lists, requires prior specific
-  permission and/or a fee. Request permissions from permissions@acm.org or
-  Publications Dept., ACM, Inc., fax +1~(212) 869-0481. \par
-  \vspace{2pt}
-  \noindent \textsl{\@conferencename}\quad \@conferenceinfo \par
-  \noindent Copyright \copyright\ \@copyrightyear\ ACM \@copyrightdata \dots
-  \@reprintprice\par
-  \setcopyrightdoi}
+\noindent
+Permission to make digital or hard copies of part or all of this work for
+personal or classroom use is granted without fee provided that copies are
+not made or distributed for profit or commercial advantage and that copies
+bear this notice and the full citation on the first page. Copyrights for
+components of this work owned by others than ACM must be honored.
+Abstracting with credit is permitted. To copy otherwise, to republish, to
+post on servers, or to redistribute to lists, requires prior specific
+permission and/or a fee. Request permissions from permissions@acm.org or
+Publications Dept., ACM, Inc., fax +1~(212) 869-0481. \par
+\vspace{2pt}
+\noindent \textsl{\@conferencename}\quad \@conferenceinfo \par
+\noindent Copyright \copyright\ \@copyrightyear\ ACM \@copyrightdata \dots
+\@reprintprice\par
+\setcopyrightdoi}
 
 \newcommand{\reprintprice}[1]{%
-  \gdef \@reprintprice {#1}}
+\gdef \@reprintprice {#1}}
 
 \reprintprice{\$15.00}
 
 \def \setcopyrightdoi {%
-  \if \@emptydefp{\@copyrightdoi}%
-    \if \@andp{\@notp{\@preprint}}{\@notp{\@legacycopyright}}%
-      \@latex@warning{Copyright DOI has not been provided
-                      (\noexpand\copyrightdoi)}{}%
-    \fi
-  \else
-    \noindent DOI: http://dx.doi.org/10.1145/\@copyrightdoi\par
-  \fi}
+\if \@emptydefp{\@copyrightdoi}%
+\if \@andp{\@notp{\@preprint}}{\@notp{\@legacycopyright}}%
+\@latex@warning{Copyright DOI has not been provided
+(\noexpand\copyrightdoi)}{}%
+\fi
+\else
+\noindent DOI: http://dx.doi.org/10.1145/\@copyrightdoi\par
+\fi}
 
 
 % Legacy commands.
 
 \newcommand{\permission}[1]{%
-  \gdef \@permission {#1}}
+\gdef \@permission {#1}}
 
 %%%\permission{%
 %%%  Permission to make digital or hard copies of part or all of this work for
@@ -719,105 +719,105 @@
 % Here we have some alternate permission statements and copyright lines:
 
 \newcommand{\ACMCanadapermission}{%
-  \@legacycopyrighterror{\ACMCanadapermission}%
-  \permission{%
-    Copyright \@copyrightyear\ Association for Computing Machinery.
-    ACM acknowledges that
-    this contribution was authored or co-authored by an affiliate of the
-    National Research Council of Canada (NRC).
-    As such, the Crown in Right of
-    Canada retains an equal interest in the copyright, however granting
-    nonexclusive, royalty-free right to publish or reproduce this article,
-    or to allow others to do so, provided that clear attribution
-    is also given to the authors and the NRC.}}
+\@legacycopyrighterror{\ACMCanadapermission}%
+\permission{%
+Copyright \@copyrightyear\ Association for Computing Machinery.
+ACM acknowledges that
+this contribution was authored or co-authored by an affiliate of the
+National Research Council of Canada (NRC).
+As such, the Crown in Right of
+Canada retains an equal interest in the copyright, however granting
+nonexclusive, royalty-free right to publish or reproduce this article,
+or to allow others to do so, provided that clear attribution
+is also given to the authors and the NRC.}}
 
 \newcommand{\ACMUSpermission}{%
-  \@legacycopyrighterror{\ACMUSpermission}%
-  \permission{%
-    Copyright \@copyrightyear\ Association for
-    Computing Machinery. ACM acknowledges that
-    this contribution was authored or co-authored
-    by a contractor or affiliate
-    of the U.S. Government. As such, the Government retains a nonexclusive,
-    royalty-free right to publish or reproduce this article,
-    or to allow others to do so, for Government purposes only.}}
+\@legacycopyrighterror{\ACMUSpermission}%
+\permission{%
+Copyright \@copyrightyear\ Association for
+Computing Machinery. ACM acknowledges that
+this contribution was authored or co-authored
+by a contractor or affiliate
+of the U.S. Government. As such, the Government retains a nonexclusive,
+royalty-free right to publish or reproduce this article,
+or to allow others to do so, for Government purposes only.}}
 
 \newcommand{\authorpermission}{%
-  \@legacycopyrighterror{\authorpermission}%
-  \permission{%
-    Permission to make digital or hard copies of part or all of this work for
-    personal or classroom use is granted without fee provided that copies are
-    not made or distributed for profit or commercial advantage and that copies
-    bear this notice and the full citation on the first page. Copyrights for
-    third-party components of this work must be honored. For all other uses,
-    contact the Owner/Author.}%
-  \toappear{%
-    \noindent \@permission \par
-    \vspace{2pt}
-    \noindent \textsl{\@conferencename}\quad \@conferenceinfo \par
-    ACM \@copyrightdata.}}
+\@legacycopyrighterror{\authorpermission}%
+\permission{%
+Permission to make digital or hard copies of part or all of this work for
+personal or classroom use is granted without fee provided that copies are
+not made or distributed for profit or commercial advantage and that copies
+bear this notice and the full citation on the first page. Copyrights for
+third-party components of this work must be honored. For all other uses,
+contact the Owner/Author.}%
+\toappear{%
+\noindent \@permission \par
+\vspace{2pt}
+\noindent \textsl{\@conferencename}\quad \@conferenceinfo \par
+ACM \@copyrightdata.}}
 
 \newcommand{\Sunpermission}{%
-  \@legacycopyrighterror{\Sunpermission}%
-  \permission{%
-    Copyright is held by Sun Microsystems, Inc.}%
-  \toappear{%
-    \noindent \@permission \par
-    \vspace{2pt}
-    \noindent \textsl{\@conferencename}\quad \@conferenceinfo \par
-    ACM \@copyrightdata.}}
+\@legacycopyrighterror{\Sunpermission}%
+\permission{%
+Copyright is held by Sun Microsystems, Inc.}%
+\toappear{%
+\noindent \@permission \par
+\vspace{2pt}
+\noindent \textsl{\@conferencename}\quad \@conferenceinfo \par
+ACM \@copyrightdata.}}
 
 \newcommand{\USpublicpermission}{%
-  \@legacycopyrighterror{\USpublicpermission}%
-  \permission{%
-    This paper is authored by an employee(s) of the United States
-    Government and is in the public domain.}%
-  \toappear{%
-    \noindent \@permission \par
-    \vspace{2pt}
-    \noindent \textsl{\@conferencename}\quad \@conferenceinfo \par
-    ACM \@copyrightdata.}}
+\@legacycopyrighterror{\USpublicpermission}%
+\permission{%
+This paper is authored by an employee(s) of the United States
+Government and is in the public domain.}%
+\toappear{%
+\noindent \@permission \par
+\vspace{2pt}
+\noindent \textsl{\@conferencename}\quad \@conferenceinfo \par
+ACM \@copyrightdata.}}
 
 \newcommand{\authorversion}[4]{%
-  \@legacycopyrighterror{\authorversion}%
-  \permission{%
-  Copyright \copyright\ ACM, #1. This is the author's version of the work.
-  It is posted here by permission of ACM for your personal use.
-  Not for redistribution. The definitive version was published in
-  #2, #3, http://doi.acm.org/10.1145/#4.}}
+\@legacycopyrighterror{\authorversion}%
+\permission{%
+Copyright \copyright\ ACM, #1. This is the author's version of the work.
+It is posted here by permission of ACM for your personal use.
+Not for redistribution. The definitive version was published in
+#2, #3, http://doi.acm.org/10.1145/#4.}}
 
 \def \exclusivelicense {%
-  \@latex@error{Deprecated;
-                you probably want `\noexpand\publicationrights{licensed}'}{}}
+\@latex@error{Deprecated;
+you probably want `\noexpand\publicationrights{licensed}'}{}}
 
 \def \permissiontopublish {%
-  \@latex@error{Deprecated;
-                you probably want `\noexpand\publicationrights{author-pays}'}{}}
+\@latex@error{Deprecated;
+you probably want `\noexpand\publicationrights{author-pays}'}{}}
 
 \def \@legacycopyrighterror #1{%
-  \if \@notp{\@legacycopyright}%
-    \@latex@error{Copyright permission '\noexpand#1' is deprecated; use
-                  'legacycopyright' class option to allow it}{}%
-  \fi}
-
+\if \@notp{\@legacycopyright}%
+\@latex@error{Copyright permission '\noexpand#1' is deprecated; use
+'legacycopyright' class option to allow it}{}%
+\fi}
+
 %                       Enunciations
 %                       ------------
 
 
 \def \@begintheorem #1#2{%                      {name}{number}
-  \trivlist
-  \item[\hskip \labelsep \textsc{#1 #2.}]%
-  \itshape\selectfont
-  \ignorespaces}
+\trivlist
+\item[\hskip \labelsep \textsc{#1 #2.}]%
+\itshape\selectfont
+\ignorespaces}
 
 \def \@opargbegintheorem #1#2#3{%               {name}{number}{title}
-  \trivlist
-  \item[%
-    \hskip\labelsep \textsc{#1\ #2}%
-    \if \@notp{\@emptyargp{#3}}\nut (#3).\fi]%
-  \itshape\selectfont
-  \ignorespaces}
-
+\trivlist
+\item[%
+\hskip\labelsep \textsc{#1\ #2}%
+\if \@notp{\@emptyargp{#3}}\nut (#3).\fi]%
+\itshape\selectfont
+\ignorespaces}
+
 %                       Figures
 %                       -------
 
@@ -825,24 +825,24 @@
 \@setflag \@caprule = \@true
 
 \long\def \@makecaption #1#2{%
-  \addvspace{4pt}
-  \if \@caprule
-    \hrule width \hsize height .33pt
-    \vspace{4pt}
-  \fi
-  \setbox \@tempboxa = \hbox{\@setfigurenumber{#1.}\nut #2}%
-  \if \@dimgtrp{\wd\@tempboxa}{\hsize}%
-    \noindent \@setfigurenumber{#1.}\nut #2\par
-  \else
-    \centerline{\box\@tempboxa}%
-  \fi}
+\addvspace{4pt}
+\if \@caprule
+\hrule width \hsize height .33pt
+\vspace{4pt}
+\fi
+\setbox \@tempboxa = \hbox{\@setfigurenumber{#1.}\nut #2}%
+\if \@dimgtrp{\wd\@tempboxa}{\hsize}%
+\noindent \@setfigurenumber{#1.}\nut #2\par
+\else
+\centerline{\box\@tempboxa}%
+\fi}
 
 \newcommand{\nocaptionrule}{%
-  \@setflag \@caprule = \@false}
+\@setflag \@caprule = \@false}
 
 \def \@setfigurenumber #1{%
-  {\rmfamily \bfseries \selectfont #1}}
-
+{\rmfamily \bfseries \selectfont #1}}
+
 %                       Hierarchy
 %                       ---------
 
@@ -854,68 +854,68 @@
 
 \newskip{\@sectionbelowskip}
 \if \@blockstyle
-  \setlength{\@sectionbelowskip}{0.1pt}%
+\setlength{\@sectionbelowskip}{0.1pt}%
 \else
-  \setlength{\@sectionbelowskip}{4pt}%
+\setlength{\@sectionbelowskip}{4pt}%
 \fi
 
 \renewcommand{\section}{%
-  \@startsection
-    {section}%
-    {1}%
-    {0pt}%
-    {-\@sectionaboveskip}%
-    {\@sectionbelowskip}%
-    {\large \bfseries \raggedright}}
+\@startsection
+{section}%
+{1}%
+{0pt}%
+{-\@sectionaboveskip}%
+{\@sectionbelowskip}%
+{\large \bfseries \raggedright}}
 
 \newskip{\@subsectionaboveskip}
 \setvspace{\@subsectionaboveskip}{8pt plus 2pt minus 2pt}
 
 \newskip{\@subsectionbelowskip}
 \if \@blockstyle
-  \setlength{\@subsectionbelowskip}{0.1pt}%
+\setlength{\@subsectionbelowskip}{0.1pt}%
 \else
-  \setlength{\@subsectionbelowskip}{4pt}%
+\setlength{\@subsectionbelowskip}{4pt}%
 \fi
 
 \renewcommand{\subsection}{%
-  \@startsection%
-    {subsection}%
-    {2}%
-    {0pt}%
-    {-\@subsectionaboveskip}%
-    {\@subsectionbelowskip}%
-    {\normalsize \bfseries \raggedright}}
+\@startsection%
+{subsection}%
+{2}%
+{0pt}%
+{-\@subsectionaboveskip}%
+{\@subsectionbelowskip}%
+{\normalsize \bfseries \raggedright}}
 
 \renewcommand{\subsubsection}{%
-  \@startsection%
-    {subsubsection}%
-    {3}%
-    {0pt}%
-    {-\@subsectionaboveskip}
-    {\@subsectionbelowskip}%
-    {\normalsize \bfseries \raggedright}}
+\@startsection%
+{subsubsection}%
+{3}%
+{0pt}%
+{-\@subsectionaboveskip}
+{\@subsectionbelowskip}%
+{\normalsize \bfseries \raggedright}}
 
 \newskip{\@paragraphaboveskip}
 \setvspace{\@paragraphaboveskip}{6pt plus 2pt minus 2pt}
 
 \renewcommand{\paragraph}{%
-  \@startsection%
-    {paragraph}%
-    {4}%
-    {0pt}%
-    {\@paragraphaboveskip}
-    {-1em}%
-    {\normalsize \bfseries \if \@times \itshape \fi}}
+\@startsection%
+{paragraph}%
+{4}%
+{0pt}%
+{\@paragraphaboveskip}
+{-1em}%
+{\normalsize \bfseries \if \@times \itshape \fi}}
 
 \renewcommand{\subparagraph}{%
-  \@startsection%
-    {subparagraph}%
-    {4}%
-    {0pt}%
-    {\@paragraphaboveskip}
-    {-1em}%
-    {\normalsize \itshape}}
+\@startsection%
+{subparagraph}%
+{4}%
+{0pt}%
+{\@paragraphaboveskip}
+{-1em}%
+{\normalsize \itshape}}
 
 % Standard headings:
 
@@ -924,7 +924,7 @@
 \newcommand{\keywords}{\paragraph*{Keywords}}
 
 \newcommand{\terms}{\paragraph*{General Terms}}
-
+
 %                       Identification
 %                       --------------
 
@@ -938,27 +938,27 @@
 
 
 \newcommand{\conferenceinfo}[2]{%
-  \gdef \@conferencename {#1}%
-  \gdef \@conferenceinfo {#2}}
+\gdef \@conferencename {#1}%
+\gdef \@conferenceinfo {#2}}
 
 \newcommand{\copyrightyear}[1]{%
-  \gdef \@copyrightyear {#1}}
+\gdef \@copyrightyear {#1}}
 
 \let \CopyrightYear = \copyrightyear
 
 \newcommand{\copyrightdata}[1]{%
-  \gdef \@copyrightdata {#1}}
+\gdef \@copyrightdata {#1}}
 
 \let \crdata = \copyrightdata
 
 \newcommand{\proceedings}[1]{%
-  \gdef \@proceedings {#1}}
+\gdef \@proceedings {#1}}
 
 \def \copyrightDOI #1{%
-  \gdef \@copyrightdoi {#1}}
+\gdef \@copyrightdoi {#1}}
 
 \let \copyrightdoi = \copyrightDOI
-
+
 %                       Lists
 %                       -----
 
@@ -971,11 +971,11 @@
 
 \setlength{\topsep}{\standardvspace}
 \if \@blockstyle
-  \setlength{\itemsep}{1pt}
-  \setlength{\parsep}{3pt}
+\setlength{\itemsep}{1pt}
+\setlength{\parsep}{3pt}
 \else
-  \setlength{\itemsep}{1pt}
-  \setlength{\parsep}{3pt}
+\setlength{\itemsep}{1pt}
+\setlength{\parsep}{3pt}
 \fi
 
 \renewcommand{\labelitemi}{{\small \centeroncapheight{\textbullet}}}
@@ -984,8 +984,8 @@
 \renewcommand{\labelitemiv}{{\Large \textperiodcentered}}
 
 \renewcommand{\@listi}{%
-  \leftmargin = \leftmargini
-  \listparindent = 0pt}
+\leftmargin = \leftmargini
+\listparindent = 0pt}
 %%%  \itemsep = 1pt
 %%%  \parsep = 3pt}
 %%%  \listparindent = \parindent}
@@ -993,54 +993,54 @@
 \let \@listI = \@listi
 
 \renewcommand{\@listii}{%
-  \leftmargin = \leftmarginii
-  \topsep = 1pt
-  \labelwidth = \leftmarginii
-  \advance \labelwidth by -\labelsep
-  \listparindent = \parindent}
+\leftmargin = \leftmarginii
+\topsep = 1pt
+\labelwidth = \leftmarginii
+\advance \labelwidth by -\labelsep
+\listparindent = \parindent}
 
 \renewcommand{\@listiii}{%
-  \leftmargin = \leftmarginiii
-  \labelwidth = \leftmarginiii
-  \advance \labelwidth by -\labelsep
-  \listparindent = \parindent}
+\leftmargin = \leftmarginiii
+\labelwidth = \leftmarginiii
+\advance \labelwidth by -\labelsep
+\listparindent = \parindent}
 
 \renewcommand{\@listiv}{%
-  \leftmargin = \leftmarginiv
-  \labelwidth = \leftmarginiv
-  \advance \labelwidth by -\labelsep
-  \listparindent = \parindent}
-
+\leftmargin = \leftmarginiv
+\labelwidth = \leftmarginiv
+\advance \labelwidth by -\labelsep
+\listparindent = \parindent}
+
 %                       Mathematics
 %                       -----------
 
 
 \def \theequation {\arabic{equation}}
-
+
 %                       Miscellaneous
 %                       -------------
 
 
 \newcommand{\balancecolumns}{%
-  \vfill\eject
-  \global\@colht = \textheight
-  \global\ht\@cclv = \textheight}
+\vfill\eject
+\global\@colht = \textheight
+\global\ht\@cclv = \textheight}
 
 \newcommand{\nut}{\hspace{.5em}}
 
 \newcommand{\softraggedright}{%
-  \let \\ = \@centercr
-  \leftskip = 0pt
-  \rightskip = 0pt plus 10pt}
-
+\let \\ = \@centercr
+\leftskip = 0pt
+\rightskip = 0pt plus 10pt}
+
 %                       Program Code
 %                       ------- ----
 
 
 \newcommand{\mono}[1]{%
-  {\@tempdima = \fontdimen2\font
-   \texttt{\spaceskip = 1.1\@tempdima #1}}}
-
+{\@tempdima = \fontdimen2\font
+\texttt{\spaceskip = 1.1\@tempdima #1}}}
+
 %                       Running Heads and Feet
 %                       ------- ----- --- ----
 
@@ -1048,28 +1048,28 @@
 \def \@preprintfooter {}
 
 \newcommand{\preprintfooter}[1]{%
-  \gdef \@preprintfooter {#1}}
+\gdef \@preprintfooter {#1}}
 
 \if \@preprint
 
 \def \ps@plain {%
-  \let \@mkboth = \@gobbletwo
-  \let \@evenhead = \@empty
-  \def \@evenfoot {\scriptsize
-                   \rlap{\textit{\@preprintfooter}}\hfil
-                   \thepage \hfil
-                   \llap{\textit{\@formatyear}}}%
-  \let \@oddhead = \@empty
-  \let \@oddfoot = \@evenfoot}
+\let \@mkboth = \@gobbletwo
+\let \@evenhead = \@empty
+\def \@evenfoot {\scriptsize
+\rlap{\textit{\@preprintfooter}}\hfil
+\thepage \hfil
+\llap{\textit{\@formatyear}}}%
+\let \@oddhead = \@empty
+\let \@oddfoot = \@evenfoot}
 
 \else\if \@reprint
 
 \def \ps@plain {%
-  \let \@mkboth = \@gobbletwo
-  \let \@evenhead = \@empty
-  \def \@evenfoot {\scriptsize \hfil \thepage \hfil}%
-  \let \@oddhead = \@empty
-  \let \@oddfoot = \@evenfoot}
+\let \@mkboth = \@gobbletwo
+\let \@evenhead = \@empty
+\def \@evenfoot {\scriptsize \hfil \thepage \hfil}%
+\let \@oddhead = \@empty
+\let \@oddfoot = \@evenfoot}
 
 \else
 
@@ -1080,15 +1080,15 @@
 \fi\fi
 
 \def \@formatyear {%
-  \number\year/\number\month/\number\day}
-
+\number\year/\number\month/\number\day}
+
 %                       Special Characters
 %                       ------- ----------
 
 
 \DeclareRobustCommand{\euro}{%
-  \protect{\rlap{=}}{\sf \kern .1em C}}
-
+\protect{\rlap{=}}{\sf \kern .1em C}}
+
 %                       Title Page
 %                       ----- ----
 
@@ -1106,204 +1106,204 @@
 \def \@titlebanner {}
 
 \renewcommand{\title}[1]{%
-  \gdef \@titletext {#1}}
+\gdef \@titletext {#1}}
 
 \newcommand{\subtitle}[1]{%
-  \gdef \@subtitletext {#1}}
+\gdef \@subtitletext {#1}}
 
 \newcommand{\authorinfo}[3]{%           {names}{affiliation}{email/URL}
-  \global\@increment \@authorcount
-  \@withname\gdef {\@authorname\romannumeral\@authorcount}{#1}%
-  \@withname\gdef {\@authoraffil\romannumeral\@authorcount}{#2}%
-  \@withname\gdef {\@authoremail\romannumeral\@authorcount}{#3}}
+\global\@increment \@authorcount
+\@withname\gdef {\@authorname\romannumeral\@authorcount}{#1}%
+\@withname\gdef {\@authoraffil\romannumeral\@authorcount}{#2}%
+\@withname\gdef {\@authoremail\romannumeral\@authorcount}{#3}}
 
 \renewcommand{\author}[1]{%
-  \@latex@error{The \string\author\space command is obsolete;
-                use \string\authorinfo}{}}
+\@latex@error{The \string\author\space command is obsolete;
+use \string\authorinfo}{}}
 
 \newcommand{\titlebanner}[1]{%
-  \gdef \@titlebanner {#1}}
+\gdef \@titlebanner {#1}}
 
 \renewcommand{\maketitle}{%
-  \pagestyle{plain}%
-  \if \@onecolumn
-    {\hsize = \standardtextwidth
-     \@maketitle}%
-  \else
-    \twocolumn[\@maketitle]%
-  \fi
-  \@placetitlenotes
-  \if \@copyrightwanted \@copyrightspace \fi}
+\pagestyle{plain}%
+\if \@onecolumn
+{\hsize = \standardtextwidth
+\@maketitle}%
+\else
+\twocolumn[\@maketitle]%
+\fi
+\@placetitlenotes
+\if \@copyrightwanted \@copyrightspace \fi}
 
 \def \@maketitle {%
-  \begin{center}
-  \@settitlebanner
-  \let \thanks = \titlenote
-  {\leftskip = 0pt plus 0.25\linewidth
-   \rightskip = 0pt plus 0.25 \linewidth
-   \parfillskip = 0pt
-   \spaceskip = .7em
-   \noindent \LARGE \bfseries \@titletext \par}
-  \vskip 6pt
-  \noindent \Large \@subtitletext \par
-  \vskip 12pt
-  \ifcase \@authorcount
-    \@latex@error{No authors were specified for this paper}{}\or
-    \@titleauthors{i}{}{}\or
-    \@titleauthors{i}{ii}{}\or
-    \@titleauthors{i}{ii}{iii}\or
-    \@titleauthors{i}{ii}{iii}\@titleauthors{iv}{}{}\or
-    \@titleauthors{i}{ii}{iii}\@titleauthors{iv}{v}{}\or
-    \@titleauthors{i}{ii}{iii}\@titleauthors{iv}{v}{vi}\or
-    \@titleauthors{i}{ii}{iii}\@titleauthors{iv}{v}{vi}%
-                  \@titleauthors{vii}{}{}\or
-    \@titleauthors{i}{ii}{iii}\@titleauthors{iv}{v}{vi}%
-                  \@titleauthors{vii}{viii}{}\or
-    \@titleauthors{i}{ii}{iii}\@titleauthors{iv}{v}{vi}%
-                  \@titleauthors{vii}{viii}{ix}\or
-    \@titleauthors{i}{ii}{iii}\@titleauthors{iv}{v}{vi}%
-                  \@titleauthors{vii}{viii}{ix}\@titleauthors{x}{}{}\or
-    \@titleauthors{i}{ii}{iii}\@titleauthors{iv}{v}{vi}%
-                  \@titleauthors{vii}{viii}{ix}\@titleauthors{x}{xi}{}\or
-    \@titleauthors{i}{ii}{iii}\@titleauthors{iv}{v}{vi}%
-                  \@titleauthors{vii}{viii}{ix}\@titleauthors{x}{xi}{xii}%
-  \else
-    \@latex@error{Cannot handle more than 12 authors}{}%
-  \fi
-  \vspace{1.75pc}
-  \end{center}}
+\begin{center}
+\@settitlebanner
+\let \thanks = \titlenote
+{\leftskip = 0pt plus 0.25\linewidth
+\rightskip = 0pt plus 0.25 \linewidth
+\parfillskip = 0pt
+\spaceskip = .7em
+\noindent \LARGE \bfseries \@titletext \par}
+\vskip 6pt
+\noindent \Large \@subtitletext \par
+\vskip 12pt
+\ifcase \@authorcount
+\@latex@error{No authors were specified for this paper}{}\or
+\@titleauthors{i}{}{}\or
+\@titleauthors{i}{ii}{}\or
+\@titleauthors{i}{ii}{iii}\or
+\@titleauthors{i}{ii}{iii}\@titleauthors{iv}{}{}\or
+\@titleauthors{i}{ii}{iii}\@titleauthors{iv}{v}{}\or
+\@titleauthors{i}{ii}{iii}\@titleauthors{iv}{v}{vi}\or
+\@titleauthors{i}{ii}{iii}\@titleauthors{iv}{v}{vi}%
+\@titleauthors{vii}{}{}\or
+\@titleauthors{i}{ii}{iii}\@titleauthors{iv}{v}{vi}%
+\@titleauthors{vii}{viii}{}\or
+\@titleauthors{i}{ii}{iii}\@titleauthors{iv}{v}{vi}%
+\@titleauthors{vii}{viii}{ix}\or
+\@titleauthors{i}{ii}{iii}\@titleauthors{iv}{v}{vi}%
+\@titleauthors{vii}{viii}{ix}\@titleauthors{x}{}{}\or
+\@titleauthors{i}{ii}{iii}\@titleauthors{iv}{v}{vi}%
+\@titleauthors{vii}{viii}{ix}\@titleauthors{x}{xi}{}\or
+\@titleauthors{i}{ii}{iii}\@titleauthors{iv}{v}{vi}%
+\@titleauthors{vii}{viii}{ix}\@titleauthors{x}{xi}{xii}%
+\else
+\@latex@error{Cannot handle more than 12 authors}{}%
+\fi
+\vspace{1.75pc}
+\end{center}}
 
 \def \@settitlebanner {%
-  \if \@andp{\@orp{\@preprint}{\@reprint}}
-            {\@notp{\@emptydefp{\@titlebanner}}}%
-    \vbox to 0pt{%
-      \vskip -32pt
-      \noindent \textbf{\@titlebanner}\par
-      \vss}%
-    \nointerlineskip
-  \fi}
+\if \@andp{\@orp{\@preprint}{\@reprint}}
+{\@notp{\@emptydefp{\@titlebanner}}}%
+\vbox to 0pt{%
+\vskip -32pt
+\noindent \textbf{\@titlebanner}\par
+\vss}%
+\nointerlineskip
+\fi}
 
 \def \@titleauthors #1#2#3{%
-  \if \@andp{\@emptyargp{#2}}{\@emptyargp{#3}}%
-    \noindent \@setauthor{40pc}{#1}{\@false}\par
-  \else\if \@emptyargp{#3}%
-    \noindent \@setauthor{17pc}{#1}{\@false}\hspace{3pc}%
-              \@setauthor{17pc}{#2}{\@false}\par
-  \else
-    \noindent \@setauthor{12.5pc}{#1}{\@false}\hspace{2pc}%
-              \@setauthor{12.5pc}{#2}{\@false}\hspace{2pc}%
-              \@setauthor{12.5pc}{#3}{\@true}\par
-    \relax
-  \fi\fi
-  \vspace{20pt}}
+\if \@andp{\@emptyargp{#2}}{\@emptyargp{#3}}%
+\noindent \@setauthor{40pc}{#1}{\@false}\par
+\else\if \@emptyargp{#3}%
+\noindent \@setauthor{17pc}{#1}{\@false}\hspace{3pc}%
+\@setauthor{17pc}{#2}{\@false}\par
+\else
+\noindent \@setauthor{12.5pc}{#1}{\@false}\hspace{2pc}%
+\@setauthor{12.5pc}{#2}{\@false}\hspace{2pc}%
+\@setauthor{12.5pc}{#3}{\@true}\par
+\relax
+\fi\fi
+\vspace{20pt}}
 
 \def \@setauthor #1#2#3{%                       {width}{text}{unused}
-  \vtop{%
-    \def \and {%
-      \hspace{16pt}}
-    \hsize = #1
-    \normalfont
-    \centering
-    \large \@name{\@authorname#2}\par
-    \vspace{5pt}
-    \normalsize \@name{\@authoraffil#2}\par
-    \vspace{2pt}
-    \textsf{\@name{\@authoremail#2}}\par}}
+\vtop{%
+\def \and {%
+\hspace{16pt}}
+\hsize = #1
+\normalfont
+\centering
+\large \@name{\@authorname#2}\par
+\vspace{5pt}
+\normalsize \@name{\@authoraffil#2}\par
+\vspace{2pt}
+\textsf{\@name{\@authoremail#2}}\par}}
 
 \def \@maybetitlenote #1{%
-  \if \@andp{#1}{\@gtrp{\@authorcount}{3}}%
-    \titlenote{See page~\pageref{@addauthors} for additional authors.}%
-  \fi}
+\if \@andp{#1}{\@gtrp{\@authorcount}{3}}%
+\titlenote{See page~\pageref{@addauthors} for additional authors.}%
+\fi}
 
 \newtoks{\@fnmark}
 
 \newcommand{\titlenote}[1]{%
-  \global\@increment \@titlenotecount
-  \ifcase \@titlenotecount \relax \or
-    \@fnmark = {\ast}\or
-    \@fnmark = {\dagger}\or
-    \@fnmark = {\ddagger}\or
-    \@fnmark = {\S}\or
-    \@fnmark = {\P}\or
-    \@fnmark = {\ast\ast}%
-  \fi
-  \,$^{\the\@fnmark}$%
-  \edef \reserved@a {\noexpand\@appendtotext{%
-                       \noexpand\@titlefootnote{\the\@fnmark}}}%
-  \reserved@a{#1}}
+\global\@increment \@titlenotecount
+\ifcase \@titlenotecount \relax \or
+\@fnmark = {\ast}\or
+\@fnmark = {\dagger}\or
+\@fnmark = {\ddagger}\or
+\@fnmark = {\S}\or
+\@fnmark = {\P}\or
+\@fnmark = {\ast\ast}%
+\fi
+\,$^{\the\@fnmark}$%
+\edef \reserved@a {\noexpand\@appendtotext{%
+\noexpand\@titlefootnote{\the\@fnmark}}}%
+\reserved@a{#1}}
 
 \def \@appendtotext #1#2{%
-  \global\@titlenotetext = \expandafter{\the\@titlenotetext #1{#2}}}
+\global\@titlenotetext = \expandafter{\the\@titlenotetext #1{#2}}}
 
 \newcount{\@authori}
 
 \iffalse
 \def \additionalauthors {%
-  \if \@gtrp{\@authorcount}{3}%
-    \section{Additional Authors}%
-    \label{@addauthors}%
-    \noindent
-    \@authori = 4
-    {\let \\ = ,%
-     \loop
-       \textbf{\@name{\@authorname\romannumeral\@authori}},
-       \@name{\@authoraffil\romannumeral\@authori},
-       email: \@name{\@authoremail\romannumeral\@authori}.%
-       \@increment \@authori
-     \if \@notp{\@gtrp{\@authori}{\@authorcount}} \repeat}%
-    \par
-  \fi
-  \global\@setflag \@addauthorsdone = \@true}
+\if \@gtrp{\@authorcount}{3}%
+\section{Additional Authors}%
+\label{@addauthors}%
+\noindent
+\@authori = 4
+{\let \\ = ,%
+\loop
+\textbf{\@name{\@authorname\romannumeral\@authori}},
+\@name{\@authoraffil\romannumeral\@authori},
+email: \@name{\@authoremail\romannumeral\@authori}.%
+\@increment \@authori
+\if \@notp{\@gtrp{\@authori}{\@authorcount}} \repeat}%
+\par
+\fi
+\global\@setflag \@addauthorsdone = \@true}
 \fi
 
 \let \addauthorsection = \additionalauthors
 
 \def \@placetitlenotes {
-  \the\@titlenotetext}
-
+\the\@titlenotetext}
+
 %                       Utilities
 %                       ---------
 
 
 \newcommand{\centeroncapheight}[1]{%
-  {\setbox\@tempboxa = \hbox{#1}%
-   \@measurecapheight{\@tempdima}%         % Calculate ht(CAP) - ht(text)
-   \advance \@tempdima by -\ht\@tempboxa   %           ------------------
-   \divide \@tempdima by 2                 %                   2
-   \raise \@tempdima \box\@tempboxa}}
+{\setbox\@tempboxa = \hbox{#1}%
+\@measurecapheight{\@tempdima}%         % Calculate ht(CAP) - ht(text)
+\advance \@tempdima by -\ht\@tempboxa   %           ------------------
+\divide \@tempdima by 2                 %                   2
+\raise \@tempdima \box\@tempboxa}}
 
 \newbox{\@measbox}
 
 \def \@measurecapheight #1{%                            {\dimen}
-  \setbox\@measbox = \hbox{ABCDEFGHIJKLMNOPQRSTUVWXYZ}%
-  #1 = \ht\@measbox}
+\setbox\@measbox = \hbox{ABCDEFGHIJKLMNOPQRSTUVWXYZ}%
+#1 = \ht\@measbox}
 
 \long\def \@titlefootnote #1#2{%
-  \insert\footins{%
-    \reset@font\footnotesize
-    \interlinepenalty\interfootnotelinepenalty
-    \splittopskip\footnotesep
-    \splitmaxdepth \dp\strutbox \floatingpenalty \@MM
-    \hsize\columnwidth \@parboxrestore
+\insert\footins{%
+\reset@font\footnotesize
+\interlinepenalty\interfootnotelinepenalty
+\splittopskip\footnotesep
+\splitmaxdepth \dp\strutbox \floatingpenalty \@MM
+\hsize\columnwidth \@parboxrestore
 %%%    \protected@edef\@currentlabel{%
 %%%       \csname p@footnote\endcsname\@thefnmark}%
-    \color@begingroup
-      \def \@makefnmark {$^{#1}$}%
-      \@makefntext{%
-        \rule\z@\footnotesep\ignorespaces#2\@finalstrut\strutbox}%
-    \color@endgroup}}
-
+\color@begingroup
+\def \@makefnmark {$^{#1}$}%
+\@makefntext{%
+\rule\z@\footnotesep\ignorespaces#2\@finalstrut\strutbox}%
+\color@endgroup}}
+
 %                       LaTeX Modifications
 %                       ----- -------------
 
 \def \@seccntformat #1{%
-  \@name{\the#1}%
-  \@expandaftertwice\@seccntformata \csname the#1\endcsname.\@mark
-  \quad}
+\@name{\the#1}%
+\@expandaftertwice\@seccntformata \csname the#1\endcsname.\@mark
+\quad}
 
 \def \@seccntformata #1.#2\@mark{%
-  \if \@emptyargp{#2}.\fi}
-
+\if \@emptyargp{#2}.\fi}
+
 %                       Revision History
 %                       -------- -------
 

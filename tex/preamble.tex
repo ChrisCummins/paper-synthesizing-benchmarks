@@ -35,19 +35,19 @@
 \usepackage{url}
 
 \usepackage[%
-    backend=biber,
-    style=numeric-comp,
-    sorting=none,        % nty,nyt,nyvt,anyt,anyvt,ynt,ydnt,none
-    sortcites=true,      % sort \cite{b a d c}: true,false
-    block=none,          % space between blocks: none,space,par,nbpar,ragged
-    indexing=false,      % indexing options: true,false,cite,bib
-    citereset=none,      % don't reset cites
-    isbn=false,          % print ISBN?
-    url=true,            % print URL?
-    doi=false,           % print DOI?
-    natbib=true,         % natbib compatability
-    maxbibnames=99       % no 'et-al' condensing author names in biliography
-  ]{biblatex}
+backend=biber,
+style=numeric-comp,
+sorting=none,        % nty,nyt,nyvt,anyt,anyvt,ynt,ydnt,none
+sortcites=true,      % sort \cite{b a d c}: true,false
+block=none,          % space between blocks: none,space,par,nbpar,ragged
+indexing=false,      % indexing options: true,false,cite,bib
+citereset=none,      % don't reset cites
+isbn=false,          % print ISBN?
+url=true,            % print URL?
+doi=false,           % print DOI?
+natbib=true,         % natbib compatability
+maxbibnames=99       % no 'et-al' condensing author names in biliography
+]{biblatex}
 
 \addbibresource{./refs.bib}
 \renewcommand{\bibfont}{\normalfont}
@@ -66,39 +66,39 @@
 % Source code listings.
 \usepackage{listings}
 \lstset{%
-  basicstyle=\scriptsize,%
-  numbers=left,%
-  xleftmargin=2em,
-  framexleftmargin=2em,
-  escapeinside={@|}{|@},
-  frame=b,%
-  breaklines=true,%
-  postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}},%
-  % red arrow at line breaks
-  captionpos=b%
+basicstyle=\scriptsize,%
+numbers=left,%
+xleftmargin=2em,
+framexleftmargin=2em,
+escapeinside={@|}{|@},
+frame=b,%
+breaklines=true,%
+postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}},%
+% red arrow at line breaks
+captionpos=b%
 }
 
 % Commands to supress and reset line numbers.
 \let\origthelstnumber\thelstnumber
 
 \newcommand*\Suppressnumber{%
-  \lst@AddToHook{OnNewLine}{%
-    \let\thelstnumber\relax%
-     \advance\c@lstnumber-\@ne\relax%
-    }%
+\lst@AddToHook{OnNewLine}{%
+\let\thelstnumber\relax%
+\advance\c@lstnumber-\@ne\relax%
+}%
 }
 
 \newcommand*\Reactivatenumber{%
-  \lst@AddToHook{OnNewLine}{%
-   \let\thelstnumber\origthelstnumber%
-   \advance\c@lstnumber\@ne\relax}%
+\lst@AddToHook{OnNewLine}{%
+\let\thelstnumber\origthelstnumber%
+\advance\c@lstnumber\@ne\relax}%
 }
 
 % OpenCL listings
 %
 % From:
 % http://gpumodeling.blogspot.com/2011/06/opencl-programs-in-latex-listings.html
- \lstdefinelanguage[OpenCL]{C}[ANSI]{C}
+\lstdefinelanguage[OpenCL]{C}[ANSI]{C}
 {morekeywords={__kernel,kernel,__local,local,__global,global,%
 __constant,constant,__private,private,%
 char2,char3,char4,char8,char16,%
@@ -160,9 +160,9 @@ complex,imaginary},%
 % vertical top and bottom padding. See:
 %     http://www.latex-community.org/forum/viewtopic.php?f=5&t=1890
 \newenvironment{myalignat}[1]{%
-  \setlength{\abovedisplayskip}{-.7\baselineskip}%
-  \setlength{\abovedisplayshortskip}{\abovedisplayskip}%
-  \start@align\z@\st@rredtrue#1
+\setlength{\abovedisplayskip}{-.7\baselineskip}%
+\setlength{\abovedisplayshortskip}{\abovedisplayskip}%
+\start@align\z@\st@rredtrue#1
 }%
 {\endalign}
 
@@ -172,11 +172,11 @@ complex,imaginary},%
 
 % Define a command to create centred page titles.
 \newcommand{\centredtitle}[1]{
-  \begin{center}
-    \large
-    \vspace{0.9cm}
-    \textbf{#1}
-  \end{center}}
+\begin{center}
+  \large
+  \vspace{0.9cm}
+  \textbf{#1}
+\end{center}}
 
 % Provide generic commands \degree, \celsius, \perthousand, \micro
 % and \ohm which work both in text and maths mode.

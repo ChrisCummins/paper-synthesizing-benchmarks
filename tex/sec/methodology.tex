@@ -4,43 +4,44 @@
   \scriptsize%
   \centering%
   \subfloat[Individual code features]{%
-    \begin{tabular}{l c l}
-      \toprule
-      \multicolumn{3}{c}{\textbf{Raw Code Features}} \\
-      \midrule
-      \texttt{comp} & static & \#. compute operations \\
-      \texttt{mem} & static & \#. accesses to global memory \\
-      \texttt{localmem} & static & \#. accesses to local memory \\
-      \texttt{coalesced} & static & \#. coalesced memory accesses \\
-      \texttt{transfer} & dynamic & size of data transfers \\
-      \texttt{wgsize} & dynamic & \#. work-items per kernel \\
-    \end{tabular}%
-    \label{tab:features-raw}%
+  \begin{tabular}{l c l}
+    \toprule
+    \multicolumn{3}{c}{\textbf{Raw Code Features}} \\
+    \midrule
+    \texttt{comp} & static & \#. compute operations \\
+    \texttt{mem} & static & \#. accesses to global memory \\
+    \texttt{localmem} & static & \#. accesses to local memory \\
+    \texttt{coalesced} & static & \#. coalesced memory accesses \\
+    \texttt{transfer} & dynamic & size of data transfers \\
+    \texttt{wgsize} & dynamic & \#. work-items per kernel \\
+  \end{tabular}%
+  \label{tab:features-raw}%
   }\\*
   \subfloat[Combinations of raw features]{%
-    \begin{tabular}{l L{4.5cm}}
-      \toprule
-      \multicolumn{2}{c}{\textbf{Combined Code Features}} \\
-      \midrule
-      \texttt{F1: transfer/(comp+mem)} & commun.-computation ratio \\
-      \texttt{F2: coalesced/mem} & \% coalesced memory accesses \\
-      \texttt{F3: (localmem/mem)$\times$wgsize} & ratio local to global mem
-                                                  accesses \\ & $\times$ \#.\ work-items \\
-      \texttt{F4: comp/mem} & computation-mem ratio\\
-    \end{tabular}%
-    \label{tab:features-cgo13}%
+  \begin{tabular}{l L{4.5cm}}
+    \toprule
+    \multicolumn{2}{c}{\textbf{Combined Code Features}} \\
+    \midrule
+    \texttt{F1: transfer/(comp+mem)} & commun.-computation ratio \\
+    \texttt{F2: coalesced/mem} & \% coalesced memory accesses \\
+    \texttt{F3: (localmem/mem)$\times$wgsize} & ratio local to global mem
+    accesses \\ & $\times$ \#.\ work-items \\
+    \texttt{F4: comp/mem} & computation-mem ratio\\
+  \end{tabular}%
+  \label{tab:features-cgo13}%
   } %
   \caption{%
-    \emph{Grewe et al.\ }model features. %
+  \emph{Grewe et al.\ }model features. %
   } %
-  \label{tab:features} %
+  \label{tab:features}
+  %
 \end{table}
 
 \subsection{Experimental Setup}\label{subsec:experimental-setup}
 
 \paragraph{Predictive Model} We reproduce the predictive model from \citeauthor{Grewe2013}~\cite{Grewe2013}. The predictive model is used to determine the optimal mapping of a given OpenCL kernel to either a GPU or CPU. It uses supervised learning to construct a decision tree with a combination of static and dynamic kernel features extracted from source code and the OpenCL runtime, detailed in Table~\ref{tab:features-cgo13}.
 
-\paragraph{Benchmarks} As in~\cite{Grewe2013}, we test our model on the NAS Parallel Benchmarks (NPB)~\cite{Bailey1991a}. We use the hand-optimized OpenCL implementation of \citeauthor{Seo2011}~\cite{Seo2011}. In~\cite{Grewe2013} the authors augment the training set of the predictive model with 47 additional kernels taken from 4 GPGPU benchmark suites.  To more fully sample the program space, we use a much larger collection of 142 programs, summarized in Table~\ref{tab:benchmarks}. These additional programs are taken from all 7 of the most frequently used benchmark suites identified in Section~\ref{subsec:motivation}. None of these programs were used to train CLgen. We synthesized 1,000 kernels with CLgen to use as additional benchmarks.
+\paragraph{Benchmarks} As in~\cite{Grewe2013}, we test our model on the NAS Parallel Benchmarks (NPB)~\cite{Bailey1991a}. We use the hand-optimized OpenCL implementation of \citeauthor{Seo2011}~\cite{Seo2011}. In~\cite{Grewe2013} the authors augment the training set of the predictive model with 47 additional kernels taken from 4 GPGPU benchmark suites. To more fully sample the program space, we use a much larger collection of 142 programs, summarized in Table~\ref{tab:benchmarks}. These additional programs are taken from all 7 of the most frequently used benchmark suites identified in Section~\ref{subsec:motivation}. None of these programs were used to train CLgen. We synthesized 1,000 kernels with CLgen to use as additional benchmarks.
 
 \begin{table}% tab:benchmarks
   \scriptsize%
@@ -59,7 +60,8 @@
     \textbf{Total} & - & 71 & 256 \\
   \end{tabular}
   \caption{List of benchmarks.} %
-  \label{tab:benchmarks} %
+  \label{tab:benchmarks}
+  %
 \end{table}
 
 \paragraph{Platforms} We evaluate our approach on two 64-bit CPU-GPU systems, detailed in Table~\ref{tab:platforms}. One system has an AMD GPU and uses OpenSUSE 12.3; the other is equipped with an NVIDIA GPU and uses Ubuntu 16.04. Both platforms were unloaded.
