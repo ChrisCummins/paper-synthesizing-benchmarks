@@ -2,129 +2,130 @@
 #
 # Generate job list.
 #
-from __future__ import print_function
 from __future__ import division
+from __future__ import print_function
 
 import csv
 import os
 import sys
-
 from argparse import ArgumentParser
+
 from labm8 import fs
 
 
 class MalformedDataException(Exception):
-    """data file is malformed"""
-    pass
+  """data file is malformed"""
+  pass
+
 
 DSIZES = [
-    #  32-bit float buffer size:
-    256,       # 1 kB
-    512,       # 2 kB
-    1024,      # 4 kB
-    2048,      # 8 kB
-    4096,      # 16 kB
-    8192,      # 32 kB
-    16384,     # 64 kB
-    65536,     # 256 kB
-    131072,    # 512 kB
-    262144,    # 1 MB
-    524288,    # 2 MB
-    1048576,   # 4 MB
-    2097152,   # 8 MB
-    4194304,   # 16 MB
-    8388608,   # 32 MB
+  #  32-bit float buffer size:
+  256,  # 1 kB
+  512,  # 2 kB
+  1024,  # 4 kB
+  2048,  # 8 kB
+  4096,  # 16 kB
+  8192,  # 32 kB
+  16384,  # 64 kB
+  65536,  # 256 kB
+  131072,  # 512 kB
+  262144,  # 1 MB
+  524288,  # 2 MB
+  1048576,  # 4 MB
+  2097152,  # 8 MB
+  4194304,  # 16 MB
+  8388608,  # 32 MB
 ]
 
 
 def read_file_dataset(path):
-    """
-    Read dataset.
+  """
+  Read dataset.
 
-    Arguments:
-        path (str): Path to dataset.
+  Arguments:
+      path (str): Path to dataset.
 
-    Returns:
-        str[]: List of <file>-<dsize> combinations.
-    """
-    results = []
+  Returns:
+      str[]: List of <file>-<dsize> combinations.
+  """
+  results = []
 
-    with open(path) as infile:
-        reader = csv.reader(infile)
-        # SCHEMA: [ file, dsize, ... ]
-        for row in reader:
-            try:
-                results.append(str(row[0] + row[1]))
-            except Exception:
-                print("error: can't read '{}' line: ".format(path),
-                      ','.join(row)[:30], file=sys.stderr)
-    return results
+  with open(path) as infile:
+    reader = csv.reader(infile)
+    # SCHEMA: [ file, dsize, ... ]
+    for row in reader:
+      try:
+        results.append(str(row[0] + row[1]))
+      except Exception:
+        print("error: can't read '{}' line: ".format(path),
+              ','.join(row)[:30], file=sys.stderr)
+  return results
 
 
 def match_and_remove(entry, inlist):
-    """
-    Remove entry from list.
+  """
+  Remove entry from list.
 
-    Arguments:
-        entry: Entry to remove.
-        inlist: Sequence of elemtns.
+  Arguments:
+      entry: Entry to remove.
+      inlist: Sequence of elemtns.
 
-    Returns:
-        bool: True if element was in sequence and removed, else False.
-    """
-    try:
-        idx = inlist.index(entry)
-        del inlist[idx]
-        return True
-    except ValueError:
-        return False
+  Returns:
+      bool: True if element was in sequence and removed, else False.
+  """
+  try:
+    idx = inlist.index(entry)
+    del inlist[idx]
+    return True
+  except ValueError:
+    return False
 
 
 def mkjoblist(kernels_dir, results_path, errors_path):
-    kernels = [x for x in fs.ls(kernels_dir) if x.endswith(".cl")]
+  kernels = [x for x in fs.ls(kernels_dir) if x.endswith(".cl")]
 
-    results = read_file_dataset(results_path)
-    errors = read_file_dataset(errors_path)
+  results = read_file_dataset(results_path)
+  errors = read_file_dataset(errors_path)
 
-    if 'DSIZES' in os.environ:
-        dsizes = [str(var) for var in os.environ['DSIZES'].split()]
-    else:
-        dsizes = [str(var) for var in DSIZES]
+  if 'DSIZES' in os.environ:
+    dsizes = [str(var) for var in os.environ['DSIZES'].split()]
+  else:
+    dsizes = [str(var) for var in DSIZES]
 
-    jobs = []
-    for file in kernels:
-        for dsize in dsizes:
-            key = str(file + dsize)
-            if match_and_remove(key, results):
-                has_result = True
-            elif match_and_remove(key, errors):
-                has_result = True
-            else:
-                has_result = False
-            if not has_result:
-                jobs.append((file, dsize))
-    return jobs
+  jobs = []
+  for file in kernels:
+    for dsize in dsizes:
+      key = str(file + dsize)
+      if match_and_remove(key, results):
+        has_result = True
+      elif match_and_remove(key, errors):
+        has_result = True
+      else:
+        has_result = False
+      if not has_result:
+        jobs.append((file, dsize))
+  return jobs
 
 
 def main():
-    parser = ArgumentParser()
-    parser.add_argument('kernels', help='path to kernels directory')
-    parser.add_argument('results', help='path to CSV results file')
-    parser.add_argument('errors', help='path to CSV errors file')
-    args = parser.parse_args()
+  parser = ArgumentParser()
+  parser.add_argument('kernels', help='path to kernels directory')
+  parser.add_argument('results', help='path to CSV results file')
+  parser.add_argument('errors', help='path to CSV errors file')
+  args = parser.parse_args()
 
-    try:
-        assert(fs.exists(args.kernels))
-        assert(fs.exists(args.results))
-        assert(fs.exists(args.errors))
+  try:
+    assert (fs.exists(args.kernels))
+    assert (fs.exists(args.results))
+    assert (fs.exists(args.errors))
 
-        jobs = mkjoblist(args.kernels, args.results, args.errors)
-        for job in jobs:
-            print(','.join(job))
-    except Exception as e:
-        print('fatal:', e, file=sys.stderr)
-        sys.exit(1)
+    jobs = mkjoblist(args.kernels, args.results, args.errors)
+    for job in jobs:
+      print(','.join(job))
+  except Exception as e:
+    print('fatal:', e, file=sys.stderr)
+    sys.exit(1)
 
 
 if __name__ == '__main__':
-    main()
+  main()
